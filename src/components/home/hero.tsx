@@ -5,7 +5,7 @@ import { addToBag } from "@/lib/cart-store";
 const ingredients = [
   { name: "Tongkat Ali", detail: "Root extract · drive + stamina", index: "01" },
   { name: "KSM-66 Ashwagandha", detail: "Full-spectrum root · resilience", index: "02" },
-  { name: "Fadogia Agrestis", detail: "Botanical extract · vitality", index: "03" },
+  { name: "Fadogia Agrestis", detail: "Standardized extract · vitality", index: "03" },
 ];
 
 const proofPoints = ["USA Made", "Third-Party Tested", "No Fillers"];
@@ -20,7 +20,7 @@ export function Hero() {
           {/* Left: headline */}
           <div className="order-1 text-center lg:text-left">
             <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-              Advanced Botanical Performance
+              Natural Testosterone Support
             </p>
             <h1 className="mt-4 whitespace-nowrap font-display text-6xl leading-[0.86] tracking-tight text-foreground sm:text-7xl lg:text-8xl">
               Elevated
@@ -32,6 +32,11 @@ export function Hero() {
               More strength.
               <br />
               More drive.
+            </p>
+
+            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground/80 lg:mx-0">
+              A natural testosterone support formula created to help increase drive, strength,
+              endurance, and lean muscle mass.
             </p>
 
             <div className="mt-7 flex flex-col items-center gap-4 lg:items-start">
@@ -85,6 +90,10 @@ export function Hero() {
               <br />
               Different<span className="text-primary">.</span>
             </h2>
+
+            <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground/80 lg:mx-0">
+              A powerful blend of Tongkat Ali, Fadogia Agrestis, and KSM-66 Ashwagandha.
+            </p>
 
             <ul className="mt-6 space-y-3">
               {ingredients.map((item) => {
