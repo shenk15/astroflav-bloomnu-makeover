@@ -25,7 +25,7 @@ const categories = [
 
 export function CategoryTiles() {
   return (
-    <section id="categories" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+    <section id="categories" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
       <div className="text-center">
         <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">
           Find your lane

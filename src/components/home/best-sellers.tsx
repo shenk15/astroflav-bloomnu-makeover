@@ -55,7 +55,7 @@ export function BestSellers() {
   };
 
   return (
-    <section id="best-sellers" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+    <section id="best-sellers" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:justify-between">
         <div className="min-w-0">
           <h2 className="font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
