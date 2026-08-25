@@ -91,6 +91,10 @@ export function Hero() {
               Different<span className="text-primary">.</span>
             </h2>
 
+            <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground/80 lg:mx-0">
+              A powerful blend of Tongkat Ali, Fadogia Agrestis, and KSM-66 Ashwagandha.
+            </p>
+
             <ul className="mt-6 space-y-3">
               {ingredients.map((item) => {
                 const isActive = activeIngredient === item.name;
