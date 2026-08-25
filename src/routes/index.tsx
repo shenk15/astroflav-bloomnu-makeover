@@ -1,13 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/home/site-header";
 import { Hero } from "@/components/home/hero";
-import { TrustMarquee } from "@/components/home/trust-marquee";
 import { BestSellers } from "@/components/home/best-sellers";
-import { BundleSave } from "@/components/home/bundle-save";
+import { SubscribeSave } from "@/components/home/subscribe-save";
 import { CategoryTiles } from "@/components/home/category-tiles";
-import { ElevatedSpotlight } from "@/components/home/elevated-spotlight";
-import { QuizCta } from "@/components/home/quiz-cta";
-import { Faq } from "@/components/home/faq";
+import { UgcCarousel } from "@/components/home/ugc-carousel";
 import { SiteFooter } from "@/components/home/site-footer";
 
 export const Route = createFileRoute("/")({
@@ -51,13 +48,10 @@ function Index() {
       <SiteHeader />
       <main>
         <Hero />
-        <TrustMarquee />
         <BestSellers />
-        <BundleSave />
+        <SubscribeSave />
         <CategoryTiles />
-        <ElevatedSpotlight />
-        <QuizCta />
-        <Faq />
+        <UgcCarousel />
       </main>
       <SiteFooter />
     </div>

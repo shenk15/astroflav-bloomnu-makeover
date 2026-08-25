@@ -58,10 +58,10 @@ export function Hero() {
               <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href="#bundle-save"
+              href="#subscribe-save"
               className="inline-flex w-full items-center justify-center rounded-full border border-border bg-transparent px-8 py-4 text-sm font-bold uppercase tracking-wider text-foreground transition-colors hover:bg-accent sm:w-auto"
             >
-              Build your bundle
+              Subscribe &amp; save 15%
             </a>
           </div>
 
