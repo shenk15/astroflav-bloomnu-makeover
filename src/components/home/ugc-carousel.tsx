@@ -80,7 +80,7 @@ export function UgcCarousel() {
   };
 
   return (
-    <section id="community" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+    <section id="community" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
       <div className="flex items-end justify-between gap-4">
         <div>
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">

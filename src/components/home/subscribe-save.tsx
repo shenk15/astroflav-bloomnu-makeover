@@ -10,7 +10,7 @@ const perks = [
 export function SubscribeSave() {
   return (
     <section id="subscribe-save" className="border-y border-border bg-card/40">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:py-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:py-14">
         <div>
           <h2 className="font-display text-4xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Save <span className="text-primary">20%</span> with
