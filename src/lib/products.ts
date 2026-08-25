@@ -4,6 +4,7 @@ export interface Product {
   price: string;
   image: string;
   badge?: string;
+  subscribePrice?: string;
 }
 
 export const bestSellers: Product[] = [
