@@ -40,14 +40,14 @@ export function SubscribeSave() {
           </a>
         </div>
 
-        <div className="relative">
+        <div className="relative mx-auto w-full max-w-[320px] sm:max-w-md lg:max-w-none">
           <img
             src="/images/categories/bundle.jpg"
             alt="AstroFlav subscription box of performance supplements"
             loading="lazy"
-            className="aspect-[4/3] w-full rounded-3xl border border-border object-cover"
+            className="aspect-[16/10] w-full rounded-2xl border border-border object-cover sm:aspect-[4/3] sm:rounded-3xl"
           />
-          <span className="absolute -left-3 top-6 -rotate-6 rounded-full bg-primary px-6 py-3 font-display text-2xl uppercase tracking-wide text-primary-foreground shadow-xl sm:-left-6 sm:text-3xl">
+          <span className="absolute -left-2 top-4 -rotate-6 rounded-full bg-primary px-4 py-2 font-display text-lg uppercase tracking-wide text-primary-foreground shadow-xl sm:-left-6 sm:top-6 sm:px-6 sm:py-3 sm:text-3xl">
             Save 20%
           </span>
         </div>
