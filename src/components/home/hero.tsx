@@ -34,6 +34,11 @@ export function Hero() {
               More drive.
             </p>
 
+            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground/80 lg:mx-0">
+              A natural testosterone support formula created to help increase drive, strength,
+              endurance, and lean muscle mass.
+            </p>
+
             <div className="mt-7 flex flex-col items-center gap-4 lg:items-start">
               <button
                 type="button"
