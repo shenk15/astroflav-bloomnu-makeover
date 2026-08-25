@@ -36,8 +36,8 @@ export function ElevatedSpotlight() {
           <ul className="mt-6 space-y-3">
             {points.map((point) => (
               <li key={point} className="flex items-center gap-3 text-sm font-semibold text-foreground">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary">
-                  <Plus className="h-3.5 w-3.5 text-primary-foreground" aria-hidden />
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border bg-card">
+                  <Plus className="h-3.5 w-3.5 text-primary" aria-hidden />
                 </span>
                 {point}
               </li>

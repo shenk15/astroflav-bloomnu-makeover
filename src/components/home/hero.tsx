@@ -20,7 +20,7 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 pb-16 pt-14 sm:px-6 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-20">
         {/* Copy */}
         <div className="relative z-10 text-center lg:text-left">
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/50 bg-primary/15 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-foreground">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             New — Elevated T-Booster
           </span>

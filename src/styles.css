@@ -132,7 +132,7 @@
 @utility hero-glow {
   background: radial-gradient(
     ellipse 62% 55% at 50% 48%,
-    color-mix(in oklab, var(--primary) 55%, transparent),
+    color-mix(in oklab, var(--primary) 26%, transparent),
     transparent 72%
   );
 }

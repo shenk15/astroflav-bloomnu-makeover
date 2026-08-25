@@ -34,8 +34,8 @@ export function BundleSave() {
           <ul className="mt-8 space-y-5">
             {benefits.map((benefit) => (
               <li key={benefit.title} className="flex gap-4">
-                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary">
-                  <Check className="h-4 w-4 text-primary-foreground" aria-hidden />
+                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border bg-background">
+                  <Check className="h-4 w-4 text-primary" aria-hidden />
                 </span>
                 <div>
                   <p className="text-sm font-bold uppercase tracking-wide text-foreground">

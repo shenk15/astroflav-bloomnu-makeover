@@ -30,7 +30,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
           {/* Brand + newsletter */}
           <div>
-            <Wordmark className="text-3xl" />
+            <Wordmark className="h-9" />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Premium performance supplements. USA made, third-party tested, and
               never any fillers or added sugar.

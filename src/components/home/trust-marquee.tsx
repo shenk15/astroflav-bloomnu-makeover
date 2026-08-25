@@ -12,17 +12,17 @@ const items = [
 export function TrustMarquee() {
   const row = [...items, ...items];
   return (
-    <div className="overflow-hidden border-y border-primary/40 bg-primary py-3.5" aria-hidden>
+    <div className="overflow-hidden border-y border-border bg-card py-3.5" aria-hidden>
       <div className="animate-marquee flex w-max items-center">
         {[0, 1].map((half) => (
           <div key={half} className="flex items-center">
             {row.map((item, i) => (
               <span
                 key={`${half}-${i}`}
-                className="flex items-center gap-6 pr-6 text-sm font-bold uppercase tracking-[0.2em] text-primary-foreground"
+                className="flex items-center gap-6 pr-6 text-sm font-bold uppercase tracking-[0.2em] text-foreground"
               >
                 {item}
-                <Zap className="h-4 w-4 fill-primary-foreground" />
+                <Zap className="h-4 w-4 fill-primary text-primary" />
               </span>
             ))}
           </div>

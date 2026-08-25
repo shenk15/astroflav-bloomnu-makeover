@@ -2,15 +2,12 @@ import { cn } from "@/lib/utils";
 
 export function Wordmark({ className }: { className?: string }) {
   return (
-    <a
-      href="/"
-      aria-label="AstroFlav home"
-      className={cn(
-        "font-display text-2xl uppercase italic leading-none tracking-wide text-foreground",
-        className,
-      )}
-    >
-      Astro<span className="text-primary">Flav</span>
+    <a href="/" aria-label="AstroFlav home" className="inline-flex items-center">
+      <img
+        src="/images/astroflav-logo.png"
+        alt="AstroFlav"
+        className={cn("h-6 w-auto", className)}
+      />
     </a>
   );
 }
