@@ -21,10 +21,10 @@ export function Hero() {
         src="/images/hero-elevated.jpg"
         alt="AstroFlav Elevated testosterone booster bottle lit in red studio light"
         loading="eager"
-        className="absolute inset-y-0 right-0 h-full w-full scale-110 object-cover object-center brightness-150 contrast-110 lg:w-[72%] lg:scale-100"
+        className="absolute inset-y-0 right-0 h-full w-full scale-110 object-cover object-center brightness-[1.7] contrast-110 lg:w-[85%] lg:scale-100"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent lg:from-background lg:via-background/30 lg:via-40% lg:to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent lg:from-background lg:from-15% lg:via-background/15 lg:via-45% lg:to-transparent"
         aria-hidden
       />
       <div
@@ -35,7 +35,8 @@ export function Hero() {
 
 
       <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-16 sm:px-6 lg:pb-28 lg:pt-28">
-        <div className="max-w-xl">
+        <div className="max-w-lg">
+
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-foreground backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
             New — Elevated T-Booster
