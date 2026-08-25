@@ -11,7 +11,7 @@ const ingredients = [
 const proofPoints = ["USA Made", "Third-Party Tested", "No Fillers"];
 
 export function Hero() {
-  const [activeBenefit, setActiveBenefit] = useState<string | null>(null);
+  const [activeIngredient, setActiveIngredient] = useState<string | null>(null);
 
   return (
     <section className="relative isolate overflow-hidden bg-background">
