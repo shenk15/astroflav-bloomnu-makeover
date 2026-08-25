@@ -5,9 +5,10 @@ function SubscribeCard({ product }: { product: Product }) {
   return (
     <article className="group flex flex-col rounded-3xl border border-border bg-card p-4 transition-colors duration-300 hover:border-primary/60">
       <div className="card-sheen relative aspect-square overflow-hidden rounded-2xl">
-        <span className="absolute left-3 top-3 z-10 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+        <span className="absolute left-3 top-3 z-10 rounded-full bg-primary px-4 py-2 text-sm font-extrabold uppercase leading-none tracking-wider text-primary-foreground shadow-lg shadow-primary/30 ring-2 ring-primary-foreground/20 sm:text-base">
           Save 15%
         </span>
+
         <img
           src={product.image}
           alt={product.name}
