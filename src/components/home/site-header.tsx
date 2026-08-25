@@ -13,9 +13,9 @@ export function SiteHeader() {
   return (
     <>
       {/* Announcement bar */}
-      <div className="bg-primary px-4 py-2.5 text-center">
-        <p className="flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary-foreground sm:text-xs">
-          <Truck className="h-3.5 w-3.5 shrink-0" aria-hidden />
+      <div className="border-b border-border bg-card px-4 py-2.5 text-center">
+        <p className="flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs">
+          <Truck className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
           Free U.S. priority shipping on orders over $99
         </p>
       </div>
