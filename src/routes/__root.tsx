@@ -77,14 +77,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "AstroFlav | Premium Performance Supplements" },
+      {
+        name: "description",
+        content:
+          "Shop AstroFlav premium performance supplements — pre-workouts, natural testosterone support, muscle builders and recovery. USA made, third-party tested, no fillers.",
+      },
+      { name: "author", content: "AstroFlav" },
+      { property: "og:title", content: "AstroFlav | Premium Performance Supplements" },
+      {
+        property: "og:description",
+        content:
+          "Pre-workouts, natural testosterone support, muscle builders and recovery. USA made, third-party tested, no fillers.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
@@ -92,6 +99,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
