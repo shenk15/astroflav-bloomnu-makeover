@@ -55,7 +55,7 @@ export function BestSellers() {
   };
 
   return (
-    <section id="best-sellers" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
+    <section id="best-sellers" className="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:py-14">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:justify-between">
         <div className="min-w-0">
           <h2 className="font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
@@ -88,7 +88,7 @@ export function BestSellers() {
 
       <div
         ref={trackRef}
-        className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-6"
+        className="mt-6 flex snap-x sm:mt-10 snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-6"
       >
         {bestSellers.map((product) => (
           <ProductCard key={product.name} product={product} />

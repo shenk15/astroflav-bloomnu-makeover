@@ -182,11 +182,18 @@
 /* Cinematic botanical hero treatment */
 .ingredient-hero {
   position: relative;
-  min-height: 680px;
+  min-height: 520px;
   overflow: hidden;
   color: #f4f1e9;
   background: #0b0e10;
 }
+
+@media (min-width: 1024px) {
+  .ingredient-hero {
+    min-height: 680px;
+  }
+}
+
 
 .ingredient-hero::before {
   content: "";
