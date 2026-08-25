@@ -19,14 +19,15 @@ export function Hero() {
       {/* Cinematic product backdrop */}
       <img
         src="/images/hero-elevated.jpg"
-        alt="AstroFlav Elevated testosterone booster bottle lit in red studio light"
+        alt="AstroFlav Elevated testosterone booster bottle on a dark stone slab"
         loading="eager"
-        className="absolute inset-y-0 right-0 h-full w-full scale-110 object-cover object-center brightness-105 lg:w-[80%] lg:scale-100 lg:object-right"
+        className="absolute inset-y-0 right-0 h-full w-full scale-110 object-cover object-center brightness-105 lg:w-full lg:scale-100 lg:object-[70%_center]"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent lg:from-background lg:from-15% lg:via-background/15 lg:via-45% lg:to-transparent"
+        className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent lg:from-background lg:from-25% lg:via-background/20 lg:via-55% lg:to-transparent"
         aria-hidden
       />
+
       <div
         className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent"
         aria-hidden
