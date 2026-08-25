@@ -15,7 +15,7 @@ export function Hero() {
 
   return (
     <section className="ingredient-hero isolate flex items-center">
-      <div className="ingredient-hero-content mx-auto w-full max-w-7xl px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
+      <div className="ingredient-hero-content mx-auto w-full max-w-7xl px-4 pb-12 pt-6 sm:px-6 sm:pb-14 sm:pt-8 lg:pb-16 lg:pt-10">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.95fr)_minmax(0,1fr)] lg:gap-8">
           {/* Left: headline */}
           <div className="order-1 text-center lg:text-left">
