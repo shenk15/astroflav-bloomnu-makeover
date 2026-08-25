@@ -1,5 +1,7 @@
 import { Menu, Search, ShoppingBag, Truck, User } from "lucide-react";
 import { Wordmark } from "./wordmark";
+import { addToBag, useBagCount } from "@/lib/cart-store";
+
 
 const navItems = [
   { label: "Best Sellers", href: "#best-sellers" },
@@ -9,7 +11,9 @@ const navItems = [
 ];
 
 export function SiteHeader() {
+  const bagCount = useBagCount();
   return (
+
     <>
       {/* Announcement bar */}
       <div className="border-b border-border bg-card px-4 py-2.5 text-center">
@@ -62,14 +66,16 @@ export function SiteHeader() {
             </button>
             <button
               type="button"
-              aria-label="Cart"
+              aria-label={`Add Elevated to bag (${bagCount} items)`}
+              onClick={() => addToBag()}
               className="relative rounded-full p-2 text-foreground transition-colors hover:bg-accent"
             >
               <ShoppingBag className="h-5 w-5" />
               <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                0
+                {bagCount}
               </span>
             </button>
+
           </div>
         </div>
       </header>
