@@ -21,16 +21,17 @@ export function Hero() {
         src="/images/hero-elevated.jpg"
         alt="AstroFlav Elevated testosterone booster bottle lit in red studio light"
         loading="eager"
-        className="absolute inset-0 h-full w-full object-cover object-center lg:object-right"
+        className="absolute inset-y-0 right-0 h-full w-full object-cover object-center brightness-125 lg:w-[62%]"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/20"
+        className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-transparent lg:via-background/60"
         aria-hidden
       />
       <div
-        className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent"
+        className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent"
         aria-hidden
       />
+
 
       <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-16 sm:px-6 lg:pb-28 lg:pt-28">
         <div className="max-w-xl">
