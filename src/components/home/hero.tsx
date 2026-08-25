@@ -92,7 +92,7 @@ export function Hero() {
             />
           </div>
 
-          {/* Right: benefits */}
+          {/* Right: ingredients */}
           <div className="order-3 text-center lg:text-left">
             <h2 className="font-display text-4xl leading-[0.9] tracking-tight text-foreground sm:text-5xl">
               Built
@@ -101,14 +101,14 @@ export function Hero() {
             </h2>
 
             <ul className="mt-6 space-y-3">
-              {benefits.map((item) => {
-                const isActive = activeBenefit === item.name;
+              {ingredients.map((item) => {
+                const isActive = activeIngredient === item.name;
                 return (
                   <li key={item.name}>
                     <button
                       type="button"
                       aria-pressed={isActive}
-                      onClick={() => setActiveBenefit(isActive ? null : item.name)}
+                      onClick={() => setActiveIngredient(isActive ? null : item.name)}
                       className={`flex w-full items-center gap-3 rounded-2xl border px-4 py-3.5 text-left transition-colors ${
                         isActive
                           ? "border-primary bg-primary/10"
@@ -116,15 +116,20 @@ export function Hero() {
                       }`}
                     >
                       <span
-                        className={`h-2 w-2 shrink-0 rounded-full ${
+                        className={`mt-1 h-2 w-2 shrink-0 rounded-full ${
                           isActive ? "bg-primary" : "bg-primary/40"
                         }`}
                         aria-hidden
                       />
-                      <span className="text-xs font-bold uppercase tracking-[0.16em] text-foreground">
-                        {item.name}
+                      <span className="min-w-0">
+                        <span className="block text-xs font-bold uppercase tracking-[0.16em] text-foreground">
+                          {item.name}
+                        </span>
+                        <span className="mt-1 block text-[11px] text-muted-foreground/70">
+                          {item.detail}
+                        </span>
                       </span>
-                      <span className="ml-auto text-[10px] font-bold tracking-[0.2em] text-muted-foreground/50">
+                      <span className="ml-auto shrink-0 text-[10px] font-bold tracking-[0.2em] text-muted-foreground/50">
                         {item.index}
                       </span>
                     </button>
