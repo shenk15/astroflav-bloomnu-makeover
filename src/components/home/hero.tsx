@@ -14,22 +14,8 @@ export function Hero() {
   const [activeIngredient, setActiveIngredient] = useState<string | null>(null);
 
   return (
-    <section className="relative isolate overflow-hidden bg-background">
-      {/* Full-bleed botanical backdrop */}
-      <img
-        src="/images/hero-botanical.jpg"
-        alt=""
-        aria-hidden
-        loading="eager"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center"
-      />
-      <div className="absolute inset-0 bg-background/72" aria-hidden />
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/40 to-background"
-        aria-hidden
-      />
-
-      <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
+    <section className="ingredient-hero isolate flex items-center">
+      <div className="ingredient-hero-content mx-auto w-full max-w-7xl px-4 pb-16 pt-12 sm:px-6 sm:pb-20 sm:pt-16 lg:pb-24 lg:pt-20">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.95fr)_minmax(0,1fr)] lg:gap-8">
           {/* Left: headline */}
           <div className="order-1 text-center lg:text-left">

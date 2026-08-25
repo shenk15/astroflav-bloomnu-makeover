@@ -178,3 +178,39 @@
     animation: none !important;
   }
 }
+
+/* Cinematic botanical hero treatment */
+.ingredient-hero {
+  position: relative;
+  min-height: 900px;
+  overflow: hidden;
+  color: #f4f1e9;
+  background: #0b0e10;
+}
+
+.ingredient-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("/images/hero-botanical.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.52;
+}
+
+.ingredient-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 48%, rgba(7, 14, 16, 0.05), rgba(5, 7, 8, 0.88) 72%),
+    linear-gradient(90deg, rgba(8, 11, 12, 0.95) 0%, rgba(8, 11, 12, 0.24) 34%, rgba(8, 11, 12, 0.12) 58%, rgba(8, 11, 12, 0.82) 100%);
+}
+
+.ingredient-hero-content {
+  position: relative;
+  z-index: 2;
+}
