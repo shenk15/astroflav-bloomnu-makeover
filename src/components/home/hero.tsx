@@ -2,17 +2,16 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { addToBag } from "@/lib/cart-store";
 
-const benefits = [
-  { name: "Increases Libido", index: "01" },
-  { name: "Improves Strength & Endurance", index: "02" },
-  { name: "Creates Lean Muscle Mass", index: "03" },
-  { name: "Natural Testosterone Augmentation", index: "04" },
+const ingredients = [
+  { name: "Tongkat Ali", detail: "Root extract · drive + stamina", index: "01" },
+  { name: "KSM-66 Ashwagandha", detail: "Full-spectrum root · resilience", index: "02" },
+  { name: "Fadogia Agrestis", detail: "Botanical extract · vitality", index: "03" },
 ];
 
 const proofPoints = ["USA Made", "Third-Party Tested", "No Fillers"];
 
 export function Hero() {
-  const [activeBenefit, setActiveBenefit] = useState<string | null>(null);
+  const [activeIngredient, setActiveIngredient] = useState<string | null>(null);
 
   return (
     <section className="relative isolate overflow-hidden bg-background">
@@ -53,7 +52,7 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => addToBag()}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-xs font-bold uppercase tracking-[0.18em] text-primary-foreground transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 text-xs font-bold uppercase tracking-[0.18em] text-background transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
               >
                 Shop Elevated
                 <ArrowRight className="h-4 w-4" aria-hidden />
@@ -93,7 +92,7 @@ export function Hero() {
             />
           </div>
 
-          {/* Right: benefits */}
+          {/* Right: ingredients */}
           <div className="order-3 text-center lg:text-left">
             <h2 className="font-display text-4xl leading-[0.9] tracking-tight text-foreground sm:text-5xl">
               Built
@@ -102,14 +101,14 @@ export function Hero() {
             </h2>
 
             <ul className="mt-6 space-y-3">
-              {benefits.map((item) => {
-                const isActive = activeBenefit === item.name;
+              {ingredients.map((item) => {
+                const isActive = activeIngredient === item.name;
                 return (
                   <li key={item.name}>
                     <button
                       type="button"
                       aria-pressed={isActive}
-                      onClick={() => setActiveBenefit(isActive ? null : item.name)}
+                      onClick={() => setActiveIngredient(isActive ? null : item.name)}
                       className={`flex w-full items-center gap-3 rounded-2xl border px-4 py-3.5 text-left transition-colors ${
                         isActive
                           ? "border-primary bg-primary/10"
@@ -117,15 +116,20 @@ export function Hero() {
                       }`}
                     >
                       <span
-                        className={`h-2 w-2 shrink-0 rounded-full ${
+                        className={`mt-1 h-2 w-2 shrink-0 rounded-full ${
                           isActive ? "bg-primary" : "bg-primary/40"
                         }`}
                         aria-hidden
                       />
-                      <span className="text-xs font-bold uppercase tracking-[0.16em] text-foreground">
-                        {item.name}
+                      <span className="min-w-0">
+                        <span className="block text-xs font-bold uppercase tracking-[0.16em] text-foreground">
+                          {item.name}
+                        </span>
+                        <span className="mt-1 block text-[11px] text-muted-foreground/70">
+                          {item.detail}
+                        </span>
                       </span>
-                      <span className="ml-auto text-[10px] font-bold tracking-[0.2em] text-muted-foreground/50">
+                      <span className="ml-auto shrink-0 text-[10px] font-bold tracking-[0.2em] text-muted-foreground/50">
                         {item.index}
                       </span>
                     </button>
