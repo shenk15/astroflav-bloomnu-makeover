@@ -2,9 +2,10 @@
    Not shipped to Shopify — see README. */
 /* Tailwind WITHOUT preflight: a global reset would fight the existing Shopify
    theme (product pages, cart, apps). A scoped reset is applied below instead. */
-@layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme) source(none);
-@import "tailwindcss/utilities.css" layer(utilities) source(none);
+/* Keep utilities unlayered so Shopify theme rules cannot override the
+   homepage layout merely because the theme's CSS is also unlayered. */
+@import "tailwindcss/utilities.css" source(none);
 @source "../sections";
 @source "../assets/astroflav-home.js";
 @source inline("opacity-0 opacity-100 group-hover:opacity-100 bg-primary bg-primary/40 border-primary/50");
@@ -71,7 +72,7 @@
    global preflight with the same normalisation, scoped to this section.
    Wrapped in @layer base and written with :where() so every Tailwind utility
    still overrides it. */
-@layer base {
+{
   .astroflav-root {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -142,7 +143,7 @@
   }
 }
 
-@layer components {
+{
   /* Inline SVG icon wrapper — replaces lucide-react components. */
   .astroflav-root .af-icon {
     display: inline-flex;
