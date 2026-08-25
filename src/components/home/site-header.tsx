@@ -7,6 +7,7 @@ import { addToBag, useBagCount } from "@/lib/cart-store";
 const navItems = [
   { label: "Best Sellers", href: "#best-sellers" },
   { label: "Subscribe & Save", href: "#subscribe-save" },
+  { label: "Bundle Builder", href: "#categories" },
   { label: "Articles", href: "#community" },
 ];
 
