@@ -1,5 +1,7 @@
 import { Menu, Search, ShoppingBag, Truck, User } from "lucide-react";
 import { Wordmark } from "./wordmark";
+import { addToBag, useBagCount } from "@/lib/cart-store";
+
 
 const navItems = [
   { label: "Best Sellers", href: "#best-sellers" },
