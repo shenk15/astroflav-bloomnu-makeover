@@ -5,11 +5,18 @@ Product pages, cart, checkout, apps, and the rest of your theme are untouched:
 everything here is scoped to `.astroflav-root` and nothing overrides theme CSS
 globally (Tailwind's global reset is deliberately **not** included).
 
-The compiled homepage utilities use `!important` deliberately. Many Shopify
-themes apply `!important` to generic layout helpers such as `.hidden`; without
-matching that priority, the desktop hero bottle and responsive grids can be
-incorrectly hidden or collapsed. Only utilities present in this homepage are
-compiled, and the design tokens/base styles remain scoped to `.astroflav-root`.
+The compiled CSS is **theme-proof by construction**: every selector is scoped to
+`.astroflav-root` repeated three times (e.g. `.astroflav-root.astroflav-root.astroflav-root .grid`)
+and utilities are emitted with `!important`, so no Shopify theme rule — even one using
+`!important` on generic names like `.grid`, `.hidden`, `ul li`, or `h2` — can outrank it.
+A scoped neutralisation layer also resets theme bullets, heading margins, forced fonts
+and colors inside the section only. Nothing leaks out: product pages, cart, checkout
+and apps are untouched. Regenerate with:
+
+```
+bunx @tailwindcss/cli -i _build/tailwind-input.css -o /tmp/raw.css --minify
+bun _build/harden.mjs /tmp/raw.css assets/astroflav-home.css
+```
 
 ## Files
 
