@@ -61,7 +61,7 @@ export function Hero() {
               href="#subscribe-save"
               className="inline-flex w-full items-center justify-center rounded-full border border-border bg-transparent px-8 py-4 text-sm font-bold uppercase tracking-wider text-foreground transition-colors hover:bg-accent sm:w-auto"
             >
-              Subscribe &amp; save 15%
+              Subscribe &amp; save 20%
             </a>
           </div>
 
