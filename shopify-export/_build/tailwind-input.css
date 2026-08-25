@@ -3,9 +3,10 @@
 /* Tailwind WITHOUT preflight: a global reset would fight the existing Shopify
    theme (product pages, cart, apps). A scoped reset is applied below instead. */
 @import "tailwindcss/theme.css" layer(theme) source(none);
-/* Keep utilities unlayered so Shopify theme rules cannot override the
-   homepage layout merely because the theme's CSS is also unlayered. */
-@import "tailwindcss/utilities.css" source(none);
+/* Keep utilities unlayered and important so opinionated Shopify themes cannot
+   override structural classes such as hidden/grid/flex. The generated utility
+   set only contains classes scanned from this isolated homepage export. */
+@import "tailwindcss/utilities.css" source(none) important;
 @source "../sections";
 @source "../assets/astroflav-home.js";
 @source inline("opacity-0 opacity-100 group-hover:opacity-100 bg-primary bg-primary/40 border-primary/50");
@@ -44,7 +45,7 @@
   --color-ring: var(--ring);
 }
 
-:root {
+.astroflav-root {
   --radius: 0.75rem;
   --background: oklch(0.13 0 0);
   --foreground: oklch(0.97 0 0);
