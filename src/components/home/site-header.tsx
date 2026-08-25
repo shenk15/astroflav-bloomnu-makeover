@@ -24,7 +24,7 @@ export function SiteHeader() {
     return () => clearInterval(id);
   }, []);
 
-  const current = announcements[index];
+  const current = announcements[index] ?? announcements[0]!;
   const Icon = current.icon;
 
   return (
