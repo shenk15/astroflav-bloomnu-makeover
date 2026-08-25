@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * AstroFlav design system — black / white / #53b4cc / gray.
+ * AstroFlav design system — black / white / #49d6f3 / gray.
  * Dark by default: the brand lives on black.
  */
 
@@ -65,7 +65,7 @@
   --card-foreground: oklch(0.97 0 0);
   --popover: oklch(0.17 0 0);
   --popover-foreground: oklch(0.97 0 0);
-  --primary: oklch(0.72 0.093 217); /* #53b4cc */
+  --primary: oklch(0.8 0.128 209); /* #49d6f3 */
   --primary-foreground: oklch(0.16 0 0);
   --secondary: oklch(0.21 0 0);
   --secondary-foreground: oklch(0.97 0 0);
@@ -77,20 +77,20 @@
   --destructive-foreground: oklch(0.98 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.72 0.093 217);
-  --chart-1: oklch(0.72 0.093 217);
+  --ring: oklch(0.8 0.128 209);
+  --chart-1: oklch(0.8 0.128 209);
   --chart-2: oklch(0.7 0 0);
   --chart-3: oklch(0.5 0 0);
   --chart-4: oklch(0.85 0 0);
   --chart-5: oklch(0.3 0 0);
   --sidebar: oklch(0.15 0 0);
   --sidebar-foreground: oklch(0.97 0 0);
-  --sidebar-primary: oklch(0.72 0.093 217);
+  --sidebar-primary: oklch(0.8 0.128 209);
   --sidebar-primary-foreground: oklch(0.16 0 0);
   --sidebar-accent: oklch(0.21 0 0);
   --sidebar-accent-foreground: oklch(0.97 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.72 0.093 217);
+  --sidebar-ring: oklch(0.8 0.128 209);
 }
 
 @layer base {
