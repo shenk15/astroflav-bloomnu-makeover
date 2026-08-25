@@ -6,8 +6,7 @@ import { addToBag, useBagCount } from "@/lib/cart-store";
 const navItems = [
   { label: "Best Sellers", href: "#best-sellers" },
   { label: "Subscribe & Save", href: "#subscribe-save" },
-  { label: "Categories", href: "#categories" },
-  { label: "Community", href: "#community" },
+  { label: "Articles", href: "#community" },
 ];
 
 export function SiteHeader() {
