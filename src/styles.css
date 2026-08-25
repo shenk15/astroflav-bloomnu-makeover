@@ -188,6 +188,13 @@
   background: #0b0e10;
 }
 
+@media (min-width: 1024px) {
+  .ingredient-hero {
+    min-height: 680px;
+  }
+}
+
+
 .ingredient-hero::before {
   content: "";
   position: absolute;
