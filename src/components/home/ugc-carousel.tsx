@@ -80,13 +80,13 @@ export function UgcCarousel() {
   };
 
   return (
-    <section id="community" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
+    <section id="community" className="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:py-14">
       <div className="flex items-end justify-between gap-4">
         <div>
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">
             Community
           </span>
-          <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
+          <h2 className="mt-3 font-display text-3xl uppercase sm:mt-4 leading-none tracking-tight text-foreground sm:text-5xl">
             Real people. <span className="text-primary">Real results.</span>
           </h2>
         </div>
@@ -112,7 +112,7 @@ export function UgcCarousel() {
 
       <div
         ref={trackRef}
-        className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-6"
+        className="mt-6 flex snap-x sm:mt-10 snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-6"
       >
         {ugcVideos.map((video) => (
           <VideoCard key={video.src} video={video} />

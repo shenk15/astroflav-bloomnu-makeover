@@ -20,8 +20,8 @@ export function Hero() {
 
   return (
     <section className="ingredient-hero isolate flex items-center">
-      <div className="ingredient-hero-content mx-auto w-full max-w-7xl px-4 pb-12 pt-6 sm:px-6 sm:pb-14 sm:pt-8 lg:pb-16 lg:pt-10">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.95fr)_minmax(0,1fr)] lg:gap-8">
+      <div className="ingredient-hero-content mx-auto w-full max-w-7xl px-4 pb-8 pt-4 sm:px-6 sm:pb-14 sm:pt-8 lg:pb-16 lg:pt-10">
+        <div className="grid items-center gap-7 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.95fr)_minmax(0,1fr)] lg:gap-8">
           {/* Left: headline */}
           <div className="order-1 text-center lg:text-left">
             <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">

@@ -25,12 +25,12 @@ const categories = [
 
 export function CategoryTiles() {
   return (
-    <section id="categories" className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:py-14">
+    <section id="categories" className="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:py-14">
       <div className="text-center">
         <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary">
           Find your lane
         </span>
-        <h2 className="mt-4 font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
+        <h2 className="mt-3 font-display text-3xl uppercase sm:mt-4 leading-none tracking-tight text-foreground sm:text-5xl">
           Premium performance supplements
         </h2>
       </div>

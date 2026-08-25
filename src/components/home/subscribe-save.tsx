@@ -10,7 +10,7 @@ const perks = [
 export function SubscribeSave() {
   return (
     <section id="subscribe-save" className="border-y border-border bg-card/40">
-      <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:py-14">
+      <div className="mx-auto grid max-w-7xl items-center gap-7 px-4 py-7 sm:gap-10 sm:px-6 sm:py-10 lg:grid-cols-2 lg:gap-14 lg:py-14">
         <div>
           <h2 className="font-display text-4xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Save <span className="text-primary">20%</span> with
@@ -18,7 +18,7 @@ export function SubscribeSave() {
             performance on repeat
           </h2>
 
-          <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+          <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-5 sm:mt-10 sm:gap-x-6 sm:gap-y-8 sm:grid-cols-4">
             {perks.map((perk) => (
               <li key={perk.label} className="flex flex-col items-center text-center">
                 <span className="flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary text-primary">
@@ -33,7 +33,7 @@ export function SubscribeSave() {
 
           <a
             href="#best-sellers"
-            className="mt-10 inline-flex items-center gap-2 rounded-full bg-foreground px-9 py-4 text-sm font-bold uppercase tracking-wider text-background transition-transform hover:scale-[1.03]"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 sm:mt-10 sm:px-9 sm:py-4 text-sm font-bold uppercase tracking-wider text-background transition-transform hover:scale-[1.03]"
           >
             Subscribe &amp; Save
             <ArrowRight className="h-4 w-4" aria-hidden />
