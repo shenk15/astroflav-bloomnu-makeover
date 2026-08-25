@@ -260,3 +260,34 @@
     display: none !important;
   }
 }
+
+/* Shopify themes frequently assign their own grid-template-columns to the
+   generic `.grid` class. These dedicated selectors preserve this section's
+   intended two-column desktop composition and four equal perk columns even
+   when the host theme uses !important utility rules. */
+.astroflav-root .af-subscribe-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.astroflav-root .af-subscribe-copy,
+.astroflav-root .af-subscribe-media {
+  min-width: 0 !important;
+}
+
+.astroflav-root .af-subscribe-perks {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+@media (min-width: 640px) {
+  .astroflav-root .af-subscribe-perks {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .astroflav-root .af-subscribe-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
