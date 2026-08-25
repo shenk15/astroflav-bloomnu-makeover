@@ -52,7 +52,7 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => addToBag()}
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-xs font-bold uppercase tracking-[0.18em] text-primary-foreground transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 text-xs font-bold uppercase tracking-[0.18em] text-background transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
               >
                 Shop Elevated
                 <ArrowRight className="h-4 w-4" aria-hidden />
