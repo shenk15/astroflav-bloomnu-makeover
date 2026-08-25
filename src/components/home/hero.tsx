@@ -30,7 +30,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-90"
       />
       <div
-        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,hsl(var(--background)/0.75)_75%)]"
+        className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-background/80"
         aria-hidden
       />
       <div
