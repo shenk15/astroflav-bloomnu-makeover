@@ -151,3 +151,30 @@
   -webkit-text-stroke: 1.5px color-mix(in oklab, var(--foreground) 22%, transparent);
   color: transparent;
 }
+
+/* Hero product float + technical ring pulse */
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes ring-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.04); }
+}
+
+@utility animate-hero-float {
+  animation: hero-float 7s ease-in-out infinite;
+}
+
+@utility animate-ring-pulse {
+  animation: ring-pulse 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-float,
+  .animate-ring-pulse,
+  .animate-marquee {
+    animation: none !important;
+  }
+}
