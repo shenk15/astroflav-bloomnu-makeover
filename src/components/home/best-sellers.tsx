@@ -1,9 +1,10 @@
-import { Plus, Star, Truck } from "lucide-react";
+import { useRef } from "react";
+import { ChevronLeft, ChevronRight, Plus, Star, Truck } from "lucide-react";
 import { bestSellers, type Product } from "@/lib/products";
 
 function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="group flex flex-col rounded-3xl border border-border bg-card p-4 transition-colors duration-300 hover:border-primary/60">
+    <article className="group flex w-[240px] shrink-0 snap-start flex-col rounded-3xl border border-border bg-card p-4 transition-colors duration-300 hover:border-primary/60 sm:w-[280px] lg:w-[calc((100%-4.5rem)/4)]">
       <div className="card-sheen relative aspect-square overflow-hidden rounded-2xl">
         {product.badge && (
           <span className="absolute left-3 top-3 z-10 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
@@ -44,27 +45,51 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 export function BestSellers() {
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const scrollBy = (direction: 1 | -1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const amount = track.clientWidth / (window.innerWidth >= 1024 ? 4 : 1.2);
+    track.scrollBy({ left: direction * amount, behavior: "smooth" });
+  };
+
   return (
     <section id="best-sellers" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:justify-between">
+        <div className="min-w-0">
           <h2 className="font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
             Shop our <span className="text-primary">best sellers</span>
           </h2>
           <p className="mt-3 flex items-center gap-2 text-sm font-medium text-muted-foreground">
-            <Truck className="h-4 w-4 text-primary" aria-hidden />
+            <Truck className="h-4 w-4 shrink-0 text-primary" aria-hidden />
             Free shipping on US orders over $99
           </p>
         </div>
-        <a
-          href="#categories"
-          className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground underline decoration-primary decoration-2 underline-offset-8 transition-colors hover:text-foreground"
-        >
-          View all supplements
-        </a>
+        <div className="flex shrink-0 gap-2">
+          <button
+            type="button"
+            onClick={() => scrollBy(-1)}
+            aria-label="Previous products"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60"
+          >
+            <ChevronLeft className="h-5 w-5" aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollBy(1)}
+            aria-label="Next products"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60"
+          >
+            <ChevronRight className="h-5 w-5" aria-hidden />
+          </button>
+        </div>
       </div>
 
-      <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+      <div
+        ref={trackRef}
+        className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-6"
+      >
         {bestSellers.map((product) => (
           <ProductCard key={product.name} product={product} />
         ))}
