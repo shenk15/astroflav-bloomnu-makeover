@@ -33,7 +33,7 @@ export function SubscribeSave() {
 
           <a
             href="#best-sellers"
-            className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-9 py-4 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-transform hover:scale-[1.03]"
+            className="mt-10 inline-flex items-center gap-2 rounded-full bg-foreground px-9 py-4 text-sm font-bold uppercase tracking-wider text-background transition-transform hover:scale-[1.03]"
           >
             Subscribe &amp; Save
             <ArrowRight className="h-4 w-4" aria-hidden />

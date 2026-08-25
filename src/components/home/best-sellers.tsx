@@ -33,7 +33,7 @@ function ProductCard({ product }: { product: Product }) {
           <span className="text-base font-extrabold text-foreground">{product.price}</span>
           <button
             type="button"
-            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary-foreground transition-transform hover:scale-105"
+            className="inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-bold uppercase tracking-wider text-background transition-transform hover:scale-105"
           >
             <Plus className="h-3.5 w-3.5" aria-hidden />
             Add
