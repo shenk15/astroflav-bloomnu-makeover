@@ -20,7 +20,7 @@ export function Hero() {
           {/* Left: headline */}
           <div className="order-1 text-center lg:text-left">
             <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
-              Advanced Botanical Performance
+              Natural Testosterone Support
             </p>
             <h1 className="mt-4 whitespace-nowrap font-display text-6xl leading-[0.86] tracking-tight text-foreground sm:text-7xl lg:text-8xl">
               Elevated
