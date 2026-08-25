@@ -69,10 +69,7 @@ export function CategoryTiles() {
         ))}
       </div>
 
-            </div>
-          </a>
-        ))}
-      </div>
+
     </section>
   );
 }
