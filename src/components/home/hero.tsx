@@ -1,106 +1,152 @@
-import { ArrowRight, FlaskConical, Leaf, ShieldCheck, Star, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-const hooks = [
-  "Raise testosterone 250+ points",
-  "More energy, drive & focus",
-  "Build lean muscle & strength",
-  "Clinically-dosed, no fillers",
+const ingredients = [
+  {
+    name: "Tongkat Ali",
+    detail: "Root extract · Drive + stamina",
+    index: "01",
+  },
+  {
+    name: "KSM-66 Ashwagandha",
+    detail: "Full-spectrum root · Resilience",
+    index: "02",
+  },
+  {
+    name: "Fadogia Agrestis",
+    detail: "Botanical extract · Vitality",
+    index: "03",
+  },
 ];
 
-const trustItems = [
-  { icon: ShieldCheck, label: "Third-Party Tested" },
-  { icon: FlaskConical, label: "Clinically Dosed" },
-  { icon: Leaf, label: "30-Day Guarantee" },
-];
+const proofPoints = ["USA Made", "Third-Party Tested", "No Fillers"];
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      {/* Cinematic product backdrop */}
+    <section className="relative overflow-hidden bg-background">
       <img
         src="/images/hero-elevated.jpg"
-        alt="AstroFlav Elevated testosterone booster bottle on a dark stone slab"
+        alt="AstroFlav Elevated advanced testosterone booster bottle floating above wet stone with botanical roots"
         loading="eager"
-        className="absolute inset-y-0 right-0 h-full w-full scale-110 object-cover object-center brightness-105 lg:w-full lg:scale-100 lg:object-[70%_center]"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-90"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent lg:from-background lg:from-25% lg:via-background/20 lg:via-55% lg:to-transparent"
+        className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,hsl(var(--background)/0.75)_75%)]"
         aria-hidden
       />
-
+      <div
+        className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-background via-background/40 to-transparent lg:w-1/2"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-y-0 right-0 w-full bg-gradient-to-l from-background via-background/40 to-transparent lg:w-1/2"
+        aria-hidden
+      />
       <div
         className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-background to-transparent"
         aria-hidden
       />
 
-
-
-      <div className="relative mx-auto max-w-7xl px-4 pb-16 pt-16 sm:px-6 lg:pb-28 lg:pt-28">
-        <div className="max-w-lg">
-
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-foreground backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            New — Elevated T-Booster
-          </span>
-
-          <h1 className="mt-6 font-display text-5xl uppercase leading-[0.92] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-            More energy.
-            <br />
-            More <span className="text-primary">strength.</span>
-            <br />
-            More drive.
-          </h1>
-
-          <div className="mt-5 flex items-center gap-2">
-            <span className="flex" aria-hidden>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-4 w-4 fill-foreground text-foreground" />
-              ))}
-            </span>
-            <span className="text-sm font-medium text-muted-foreground">
-              4.8/5 from 3,000+ verified customers
+      <div className="relative mx-auto grid max-w-7xl gap-14 px-4 pb-20 pt-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)_minmax(0,1fr)] lg:gap-8 lg:pb-28 lg:pt-24">
+        {/* Left — headline */}
+        <div className="lg:pt-10">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-primary" aria-hidden />
+            <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
+              Advanced botanical performance
             </span>
           </div>
 
-          <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
-            {hooks.map((hook) => (
-              <li
-                key={hook}
-                className="flex items-center gap-2.5 rounded-full border border-border bg-card/70 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-foreground backdrop-blur"
-              >
-                <Zap className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
-                {hook}
-              </li>
-            ))}
-          </ul>
+          <h1 className="mt-6 font-display text-6xl uppercase leading-[0.82] tracking-tight text-foreground sm:text-7xl xl:text-8xl">
+            Elev
+            <br />
+            <span className="text-muted-foreground">
+              ated<span className="text-primary">.</span>
+            </span>
+          </h1>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <p className="mt-7 font-display text-2xl uppercase leading-tight tracking-tight text-foreground sm:text-3xl">
+            More energy.
+            <br />
+            More strength.
+            <br />
+            <span className="text-primary">More drive.</span>
+          </p>
+
+          <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
+            A considered blend of time-tested botanicals, built to support the way you
+            train, recover, and show up.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-5">
             <a
               href="#best-sellers"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-bold uppercase tracking-wider text-primary-foreground transition-transform hover:scale-[1.03] sm:w-auto"
+              className="inline-flex items-center gap-3 rounded-none bg-foreground px-8 py-4 text-sm font-bold uppercase tracking-wider text-background transition-colors hover:bg-primary hover:text-primary-foreground"
             >
               Shop Elevated
               <ArrowRight className="h-4 w-4" />
             </a>
-            <a
-              href="#subscribe-save"
-              className="inline-flex w-full items-center justify-center rounded-full border border-border bg-background/60 px-8 py-4 text-sm font-bold uppercase tracking-wider text-foreground backdrop-blur transition-colors hover:bg-accent sm:w-auto"
-            >
-              Subscribe &amp; save 20%
-            </a>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              30 Servings · 120 Capsules
+            </span>
           </div>
 
-          <ul className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
-            {trustItems.map((item) => (
+          <ul className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-6 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            {proofPoints.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Center — reserved space so the bottle stays clear */}
+        <div className="hidden lg:block" aria-hidden />
+
+        {/* Right — formula */}
+        <div className="lg:pt-10">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+            The formula, in focus
+          </span>
+
+          <h2 className="mt-3 font-display text-4xl uppercase leading-[0.9] tracking-tight text-foreground sm:text-5xl">
+            Built
+            <br />
+            <span className="text-primary">Different.</span>
+          </h2>
+
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            Three purposeful botanicals. One daily baseline for the work ahead.
+          </p>
+
+          <ul className="mt-8 space-y-px">
+            {ingredients.map((item, i) => (
               <li
-                key={item.label}
-                className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                key={item.name}
+                className={`border-l-2 py-4 pl-4 pr-3 backdrop-blur-sm transition-colors ${
+                  i === 0
+                    ? "border-primary bg-card/70"
+                    : "border-border bg-transparent hover:bg-card/40"
+                }`}
               >
-                <item.icon className="h-4 w-4 text-primary" aria-hidden />
-                {item.label}
+                <div className="flex items-center justify-between gap-4">
+                  <span className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-wide text-foreground">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
+                    {item.name}
+                  </span>
+                  <span className="text-xs font-semibold text-muted-foreground">
+                    {item.index}
+                  </span>
+                </div>
+                <p className="mt-1.5 pl-[18px] text-xs uppercase tracking-wide text-muted-foreground">
+                  {item.detail}
+                </p>
               </li>
             ))}
           </ul>
+
+          <div className="mt-8 border-t border-border pt-5 text-xs uppercase tracking-[0.16em] text-muted-foreground">
+            No proprietary fog.
+            <br />
+            <span className="font-bold text-foreground">Know what you&apos;re taking.</span>
+          </div>
         </div>
       </div>
     </section>
