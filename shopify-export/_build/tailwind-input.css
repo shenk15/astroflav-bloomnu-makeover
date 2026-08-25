@@ -347,3 +347,6 @@
   box-shadow: none;
 }
 .astroflav-root * { float: none !important; }
+
+.astroflav-root { font-family: var(--font-sans) !important; -webkit-font-smoothing: antialiased; }
+.astroflav-root .font-display, .astroflav-root [class*="font-display"] { font-family: var(--font-display) !important; }
