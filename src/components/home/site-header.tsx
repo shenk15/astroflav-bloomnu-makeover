@@ -2,11 +2,10 @@ import { Menu, Search, ShoppingBag, Truck, User } from "lucide-react";
 import { Wordmark } from "./wordmark";
 
 const navItems = [
-  { label: "Supplements", href: "#best-sellers" },
-  { label: "Stacks", href: "#categories" },
-  { label: "Bundle Builder", href: "#bundle-save" },
-  { label: "Articles", href: "#faq" },
-  { label: "About Us", href: "#story" },
+  { label: "Best Sellers", href: "#best-sellers" },
+  { label: "Subscribe & Save", href: "#subscribe-save" },
+  { label: "Categories", href: "#categories" },
+  { label: "Community", href: "#community" },
 ];
 
 export function SiteHeader() {
