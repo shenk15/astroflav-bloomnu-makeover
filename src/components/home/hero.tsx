@@ -2,16 +2,17 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { addToBag } from "@/lib/cart-store";
 
-const ingredients = [
-  { name: "Tongkat Ali", detail: "Root extract · drive + stamina", index: "01" },
-  { name: "KSM-66 Ashwagandha", detail: "Full-spectrum root · resilience", index: "02" },
-  { name: "Fadogia Agrestis", detail: "Botanical extract · vitality", index: "03" },
+const benefits = [
+  { name: "Increases Libido", index: "01" },
+  { name: "Improves Strength & Endurance", index: "02" },
+  { name: "Creates Lean Muscle Mass", index: "03" },
+  { name: "Natural Testosterone Augmentation", index: "04" },
 ];
 
 const proofPoints = ["USA Made", "Third-Party Tested", "No Fillers"];
 
 export function Hero() {
-  const [activeIngredient, setActiveIngredient] = useState<string | null>(null);
+  const [activeBenefit, setActiveBenefit] = useState<string | null>(null);
 
   return (
     <section className="relative isolate overflow-hidden bg-background">
@@ -36,7 +37,7 @@ export function Hero() {
             <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">
               Advanced Botanical Performance
             </p>
-            <h1 className="mt-4 font-display text-6xl leading-[0.86] tracking-tight text-foreground sm:text-7xl lg:text-8xl">
+            <h1 className="mt-4 whitespace-nowrap font-display text-6xl leading-[0.86] tracking-tight text-foreground sm:text-7xl lg:text-8xl">
               Elevated
               <span className="text-primary">.</span>
             </h1>
@@ -46,10 +47,6 @@ export function Hero() {
               More strength.
               <br />
               More drive.
-            </p>
-            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground/80 lg:mx-0">
-              A considered blend of time-tested botanicals, built to support the way you train,
-              recover, and show up.
             </p>
 
             <div className="mt-7 flex flex-col items-center gap-4 lg:items-start">
@@ -96,45 +93,37 @@ export function Hero() {
             />
           </div>
 
-          {/* Right: formula */}
+          {/* Right: benefits */}
           <div className="order-3 text-center lg:text-left">
             <h2 className="font-display text-4xl leading-[0.9] tracking-tight text-foreground sm:text-5xl">
               Built
               <br />
               Different<span className="text-primary">.</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground/80 lg:mx-0">
-              Three purposeful botanicals. One daily baseline for the work ahead.
-            </p>
 
             <ul className="mt-6 space-y-3">
-              {ingredients.map((item) => {
-                const isActive = activeIngredient === item.name;
+              {benefits.map((item) => {
+                const isActive = activeBenefit === item.name;
                 return (
                   <li key={item.name}>
                     <button
                       type="button"
                       aria-pressed={isActive}
-                      onClick={() => setActiveIngredient(isActive ? null : item.name)}
-                      className={`flex w-full items-start gap-3 rounded-2xl border px-4 py-3.5 text-left transition-colors ${
+                      onClick={() => setActiveBenefit(isActive ? null : item.name)}
+                      className={`flex w-full items-center gap-3 rounded-2xl border px-4 py-3.5 text-left transition-colors ${
                         isActive
                           ? "border-primary bg-primary/10"
                           : "border-border bg-card/40 hover:border-primary/50"
                       }`}
                     >
                       <span
-                        className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${
+                        className={`h-2 w-2 shrink-0 rounded-full ${
                           isActive ? "bg-primary" : "bg-primary/40"
                         }`}
                         aria-hidden
                       />
-                      <span>
-                        <span className="block text-xs font-bold uppercase tracking-[0.16em] text-foreground">
-                          {item.name}
-                        </span>
-                        <span className="mt-1 block text-xs text-muted-foreground/70">
-                          {item.detail}
-                        </span>
+                      <span className="text-xs font-bold uppercase tracking-[0.16em] text-foreground">
+                        {item.name}
                       </span>
                       <span className="ml-auto text-[10px] font-bold tracking-[0.2em] text-muted-foreground/50">
                         {item.index}
@@ -144,12 +133,6 @@ export function Hero() {
                 );
               })}
             </ul>
-
-            <p className="mt-6 text-[10px] font-bold uppercase leading-relaxed tracking-[0.2em] text-muted-foreground/70">
-              No proprietary fog.
-              <br />
-              Know what you&apos;re taking.
-            </p>
           </div>
         </div>
       </div>
