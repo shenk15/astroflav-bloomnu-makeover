@@ -15,6 +15,27 @@ const proofPoints = [
   "30-Day Money-Back Guarantee",
 ];
 
+function ProductVisual({ className = "" }: { className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center py-6 lg:py-0 ${className}`}>
+      <div
+        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        aria-hidden
+      >
+        <div className="animate-ring-pulse aspect-square w-[86%] max-w-[420px] rounded-full border border-primary/25" />
+        <div className="animate-ring-pulse absolute aspect-square w-[64%] max-w-[320px] rounded-full border border-primary/20 [animation-delay:1.5s]" />
+        <div className="hero-glow absolute inset-0" />
+      </div>
+      <img
+        src="/images/products/elevated-bottle.png"
+        alt="AstroFlav Elevated advanced testosterone booster, 120 capsules"
+        loading="eager"
+        className="animate-hero-float relative w-[62%] max-w-[300px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.65)] sm:w-[48%] lg:w-full lg:max-w-[360px]"
+      />
+    </div>
+  );
+}
+
 export function Hero() {
   const [activeIngredient, setActiveIngredient] = useState<string | null>(null);
 
