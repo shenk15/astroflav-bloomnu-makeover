@@ -8,7 +8,12 @@ const ingredients = [
   { name: "Fadogia Agrestis", detail: "Standardized extract · vitality", index: "03" },
 ];
 
-const proofPoints = ["USA Made", "Third-Party Tested", "No Fillers"];
+const proofPoints = [
+  "USA Made",
+  "Third-Party Tested",
+  "No Fillers",
+  "30-Day Money-Back Guarantee",
+];
 
 export function Hero() {
   const [activeIngredient, setActiveIngredient] = useState<string | null>(null);
