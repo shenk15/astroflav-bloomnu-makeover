@@ -1,4 +1,5 @@
-import { Menu, Search, ShoppingBag, Truck, User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Layers, Menu, Search, ShoppingBag, Truck, User } from "lucide-react";
 import { Wordmark } from "./wordmark";
 import { addToBag, useBagCount } from "@/lib/cart-store";
 
@@ -9,18 +10,37 @@ const navItems = [
   { label: "Articles", href: "#community" },
 ];
 
+const announcements = [
+  { icon: Truck, text: "Free U.S. priority shipping on orders over $99" },
+  { icon: Layers, text: "Buy any 3 products & save 10% — build your bundle" },
+];
+
 export function SiteHeader() {
   const bagCount = useBagCount();
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % announcements.length), 4000);
+    return () => clearInterval(id);
+  }, []);
+
+  const current = announcements[index];
+  const Icon = current.icon;
+
   return (
 
     <>
       {/* Announcement bar */}
       <div className="border-b border-border bg-card px-4 py-2.5 text-center">
-        <p className="flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs">
-          <Truck className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
-          Free U.S. priority shipping on orders over $99
+        <p
+          key={index}
+          className="flex animate-fade-in items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs"
+        >
+          <Icon className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden />
+          {current.text}
         </p>
       </div>
+
 
       {/* Sticky nav */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
