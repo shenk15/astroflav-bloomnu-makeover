@@ -39,9 +39,12 @@ const plugin = {
     });
     root.walkRules((rule) => {
       if (inKeyframes(rule)) return;
-      rule.selectors = rule.selectors.flatMap((s) =>
-        scopeSelector(s).split(",").map((x) => x.trim())
-      );
+      // PostCSS already separates selector lists safely. Splitting the scoped
+      // selector string on commas corrupts escaped commas inside Tailwind
+      // arbitrary values such as:
+      //   .lg\:grid-cols-\[minmax\(0\,1fr\)_...\]
+      // Those classes power the hero and Subscribe & Save desktop grids.
+      rule.selectors = rule.selectors.map(scopeSelector);
     });
   },
 };
