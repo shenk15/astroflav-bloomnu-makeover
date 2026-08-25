@@ -1,0 +1,612 @@
+{%- comment -%}
+  AstroFlav homepage — full section (header, hero, best sellers, subscribe & save,
+  categories, UGC carousel, footer).
+
+  Install:
+    1. Upload every file listed in shopify-export/README.md to Assets.
+    2. Copy this file to sections/astroflav-home.liquid
+    3. Copy assets/astroflav-home.css and assets/astroflav-home.js to Assets.
+    4. Use templates/index.json (or add the section in the Theme Editor).
+
+  Nothing here touches product pages, cart, checkout, apps, or backend.
+{%- endcomment -%}
+
+{{ 'astroflav-home.css' | asset_url | stylesheet_tag }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap">
+
+<style>
+  /* Hero background image has to come from Shopify assets, not /images/. */
+  .astroflav-root .ingredient-hero::before {
+    background-image: url({{ 'hero-botanical.jpg' | asset_url }});
+  }
+</style>
+
+{%- liquid
+  assign icon_class = 'shrink-0'
+-%}
+
+{%- capture icon_arrow_right -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>{%- endcapture -%}
+{%- capture icon_arrow_left -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>{%- endcapture -%}
+{%- capture icon_arrow_up_right -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>{%- endcapture -%}
+{%- capture icon_chevron_left -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>{%- endcapture -%}
+{%- capture icon_chevron_right -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>{%- endcapture -%}
+{%- capture icon_plus -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>{%- endcapture -%}
+{%- capture icon_star -%}<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{%- endcapture -%}
+{%- capture icon_truck -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>{%- endcapture -%}
+{%- capture icon_layers -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>{%- endcapture -%}
+{%- capture icon_menu -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>{%- endcapture -%}
+{%- capture icon_search -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>{%- endcapture -%}
+{%- capture icon_bag -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>{%- endcapture -%}
+{%- capture icon_user -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>{%- endcapture -%}
+{%- capture icon_dollar -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>{%- endcapture -%}
+{%- capture icon_mail -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>{%- endcapture -%}
+{%- capture icon_package -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>{%- endcapture -%}
+{%- capture icon_pencil -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>{%- endcapture -%}
+{%- capture icon_play -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>{%- endcapture -%}
+{%- capture icon_play_filled -%}<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>{%- endcapture -%}
+{%- capture icon_instagram -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>{%- endcapture -%}
+{%- capture icon_facebook -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>{%- endcapture -%}
+{%- capture icon_twitter -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>{%- endcapture -%}
+{%- capture icon_youtube -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>{%- endcapture -%}
+
+<div class="astroflav-root min-h-screen bg-background text-foreground" data-astroflav-home>
+
+  {%- if section.settings.show_header -%}
+  {%- comment -%} ── Announcement bar (rotating) ───────────────────────────── {%- endcomment -%}
+  <div class="border-b border-border bg-card px-4 py-2.5 text-center"
+    data-af-announcement-bar
+    data-text-one="{{ section.settings.announcement_1 | escape }}"
+    data-text-two="{{ section.settings.announcement_2 | escape }}">
+    <p class="af-fade flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs" data-af-announcement>
+      <span class="af-icon h-3.5 w-3.5 shrink-0 text-primary" data-af-announcement-icon>{{ icon_truck }}</span>
+      <span data-af-announcement-text>{{ section.settings.announcement_1 }}</span>
+    </p>
+    <template data-af-icon-0>{{ icon_truck }}</template>
+    <template data-af-icon-1>{{ icon_layers }}</template>
+  </div>
+
+  {%- comment -%} ── Sticky nav ────────────────────────────────────────────── {%- endcomment -%}
+  <header class="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+      <div class="flex items-center gap-3">
+        <button type="button" aria-label="Open menu" data-af-menu-toggle
+          class="af-icon-btn rounded-full p-2 text-foreground transition-colors hover:bg-accent lg:hidden">
+          <span class="af-icon h-5 w-5">{{ icon_menu }}</span>
+        </button>
+        <a href="{{ routes.root_url }}" aria-label="AstroFlav home" class="inline-flex items-center">
+          <img src="{{ 'astroflav-logo.png' | asset_url }}" alt="AstroFlav" class="h-6 w-auto" width="160" height="24">
+        </a>
+      </div>
+
+      <nav aria-label="Main navigation" class="hidden items-center gap-8 lg:flex">
+        <a href="#best-sellers" class="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground">Best Sellers</a>
+        <a href="#subscribe-save" class="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground">Subscribe &amp; Save</a>
+        <a href="#categories" class="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground">Bundle Builder</a>
+        <a href="#community" class="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground">Articles</a>
+      </nav>
+
+      <div class="flex items-center gap-1">
+        <a href="{{ routes.search_url }}" aria-label="Search" class="af-icon-btn rounded-full p-2 text-foreground transition-colors hover:bg-accent">
+          <span class="af-icon h-5 w-5">{{ icon_search }}</span>
+        </a>
+        <a href="{{ routes.account_url }}" aria-label="Account" class="af-icon-btn hidden rounded-full p-2 text-foreground transition-colors hover:bg-accent sm:block">
+          <span class="af-icon h-5 w-5">{{ icon_user }}</span>
+        </a>
+        <a href="{{ routes.cart_url }}" aria-label="Cart" class="af-icon-btn relative rounded-full p-2 text-foreground transition-colors hover:bg-accent">
+          <span class="af-icon h-5 w-5">{{ icon_bag }}</span>
+          <span data-af-cart-count class="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+
+    {%- comment -%} Mobile drawer (vanilla toggle) {%- endcomment -%}
+    <nav data-af-mobile-nav hidden aria-label="Mobile navigation"
+      class="border-t border-border bg-background px-4 py-4 lg:hidden">
+      <a href="#best-sellers" class="block py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Best Sellers</a>
+      <a href="#subscribe-save" class="block py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Subscribe &amp; Save</a>
+      <a href="#categories" class="block py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Bundle Builder</a>
+      <a href="#community" class="block py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Articles</a>
+    </nav>
+  </header>
+  {%- endif -%}
+
+  <main>
+    {%- comment -%} ── 1. HERO ─────────────────────────────────────────────── {%- endcomment -%}
+    {%- liquid
+      assign hero_product = all_products[section.settings.hero_product]
+      assign hero_variant_id = hero_product.selected_or_first_available_variant.id
+      if section.settings.hero_image != blank
+        assign hero_image_url = section.settings.hero_image | image_url: width: 800
+      else
+        assign hero_image_url = 'elevated-bottle.png' | asset_url
+      endif
+    -%}
+    <section class="ingredient-hero isolate flex items-center">
+      <div class="ingredient-hero-content mx-auto w-full max-w-7xl px-4 pb-8 pt-4 sm:px-6 sm:pb-14 sm:pt-8 lg:pb-16 lg:pt-10">
+        <div class="grid items-center gap-7 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.95fr)_minmax(0,1fr)] lg:gap-8">
+
+          <div class="order-1 text-center lg:text-left">
+            <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">{{ section.settings.hero_eyebrow }}</p>
+            <h1 class="mt-4 whitespace-nowrap font-display text-6xl leading-[0.86] tracking-tight text-foreground sm:text-7xl lg:text-8xl">
+              {{ section.settings.hero_title }}<span class="text-primary">.</span>
+            </h1>
+            <p class="mt-5 font-display text-2xl leading-tight text-foreground sm:text-3xl">
+              {{ section.settings.hero_subtitle | newline_to_br }}
+            </p>
+            <p class="mx-auto mt-5 max-w-md text-sm leading-relaxed text-muted-foreground/80 lg:mx-0">
+              {{ section.settings.hero_copy }}
+            </p>
+
+            {%- comment -%} Mobile: bottle sits above the CTA {%- endcomment -%}
+            <div class="lg:hidden">
+              <div class="relative flex items-center justify-center py-6 lg:py-0 mt-6">
+                <div class="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                  <div class="animate-ring-pulse aspect-square w-[86%] max-w-[420px] rounded-full border border-primary/25"></div>
+                  <div class="animate-ring-pulse absolute aspect-square w-[64%] max-w-[320px] rounded-full border border-primary/20 [animation-delay:1.5s]"></div>
+                  <div class="hero-glow absolute inset-0"></div>
+                </div>
+                <img src="{{ hero_image_url }}" alt="{{ section.settings.hero_image_alt | escape }}" loading="eager"
+                  class="animate-hero-float relative w-[62%] max-w-[300px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.65)] sm:w-[48%] lg:w-full lg:max-w-[360px]">
+              </div>
+            </div>
+
+            <div class="mt-7 flex flex-col items-center gap-4 lg:items-start">
+              {%- if hero_variant_id -%}
+                <button type="button" data-af-add-to-cart="{{ hero_variant_id }}"
+                  class="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 text-xs font-bold uppercase tracking-[0.18em] text-background transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground">
+                  {{ section.settings.hero_cta_label }}
+                  <span class="af-icon h-4 w-4">{{ icon_arrow_right }}</span>
+                </button>
+              {%- else -%}
+                <a href="{{ section.settings.hero_cta_url | default: '#best-sellers' }}"
+                  class="inline-flex items-center gap-2 rounded-full bg-foreground px-8 py-4 text-xs font-bold uppercase tracking-[0.18em] text-background transition-transform hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground">
+                  {{ section.settings.hero_cta_label }}
+                  <span class="af-icon h-4 w-4">{{ icon_arrow_right }}</span>
+                </a>
+              {%- endif -%}
+              <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground/70">{{ section.settings.hero_servings }}</p>
+            </div>
+
+            <ul class="mt-7 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+              {%- assign proof_points = section.settings.hero_proof | split: '|' -%}
+              {%- for point in proof_points -%}
+                <li class="rounded-full border border-border px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground/80">{{ point | strip }}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+
+          {%- comment -%} Center: product (desktop) {%- endcomment -%}
+          <div class="relative flex items-center justify-center py-6 lg:py-0 order-2 hidden lg:flex">
+            <div class="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
+              <div class="animate-ring-pulse aspect-square w-[86%] max-w-[420px] rounded-full border border-primary/25"></div>
+              <div class="animate-ring-pulse absolute aspect-square w-[64%] max-w-[320px] rounded-full border border-primary/20 [animation-delay:1.5s]"></div>
+              <div class="hero-glow absolute inset-0"></div>
+            </div>
+            <img src="{{ hero_image_url }}" alt="{{ section.settings.hero_image_alt | escape }}" loading="eager"
+              class="animate-hero-float relative w-[62%] max-w-[300px] drop-shadow-[0_30px_60px_rgba(0,0,0,0.65)] sm:w-[48%] lg:w-full lg:max-w-[360px]">
+          </div>
+
+          {%- comment -%} Right: ingredients {%- endcomment -%}
+          <div class="order-3 text-center lg:text-left">
+            <h2 class="font-display text-4xl leading-[0.9] tracking-tight text-foreground sm:text-5xl">
+              Built<br>Different<span class="text-primary">.</span>
+            </h2>
+            <p class="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground/80 lg:mx-0">
+              {{ section.settings.hero_blend }}
+            </p>
+            <ul class="mt-6 space-y-3">
+              {%- assign ingredient_rows = section.settings.hero_ingredients | newline_to_br | split: '<br />' -%}
+              {%- for row in ingredient_rows -%}
+                {%- assign parts = row | strip | split: '::' -%}
+                {%- if parts.size > 0 and parts[0] != blank -%}
+                  {%- assign idx = forloop.index | prepend: '0' | slice: -2, 2 -%}
+                  <li>
+                    <button type="button" aria-pressed="false" data-af-ingredient
+                      class="flex w-full items-start gap-3 rounded-2xl border border-border bg-card/40 px-4 py-3 text-left transition-colors hover:border-primary/50">
+                      <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary/40" data-af-ingredient-dot aria-hidden="true"></span>
+                      <span class="min-w-0">
+                        <span class="block text-xs font-bold uppercase tracking-[0.16em] text-foreground">{{ parts[0] | strip }}</span>
+                        <span class="mt-1 block text-[11px] text-muted-foreground/70">{{ parts[1] | strip }}</span>
+                      </span>
+                      <span class="ml-auto shrink-0 text-[10px] font-bold tracking-[0.2em] text-muted-foreground/50">{{ idx }}</span>
+                    </button>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} ── 2. BEST SELLERS carousel ────────────────────────────── {%- endcomment -%}
+    <section id="best-sellers" class="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:py-14">
+      <div class="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:justify-between">
+        <div class="min-w-0">
+          <h2 class="font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
+            Shop our <span class="text-primary">best sellers</span>
+          </h2>
+          <p class="mt-3 flex items-center gap-2 text-sm font-medium text-muted-foreground">
+            <span class="af-icon h-4 w-4 shrink-0 text-primary">{{ icon_truck }}</span>
+            {{ section.settings.shipping_note }}
+          </p>
+        </div>
+        <div class="flex shrink-0 gap-2">
+          <button type="button" data-af-scroll="best-sellers-track" data-af-dir="-1" aria-label="Previous products"
+            class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
+            <span class="af-icon h-5 w-5">{{ icon_chevron_left }}</span>
+          </button>
+          <button type="button" data-af-scroll="best-sellers-track" data-af-dir="1" aria-label="Next products"
+            class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
+            <span class="af-icon h-5 w-5">{{ icon_chevron_right }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="best-sellers-track" data-af-track="products"
+        class="mt-6 flex snap-x sm:mt-10 snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-6">
+        {%- assign bs_collection = collections[section.settings.best_sellers_collection] -%}
+        {%- for product in bs_collection.products limit: section.settings.best_sellers_limit -%}
+          <article class="group flex w-[240px] shrink-0 snap-start flex-col rounded-3xl border border-border bg-card p-4 transition-colors duration-300 hover:border-primary/60 sm:w-[280px] lg:w-[calc((100%-4.5rem)/4)]">
+            <a href="{{ product.url }}" class="card-sheen relative aspect-square overflow-hidden rounded-2xl block">
+              {%- if forloop.index == 1 -%}
+                <span class="absolute left-3 top-3 z-10 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">Best Seller</span>
+              {%- elsif forloop.index == 2 -%}
+                <span class="absolute left-3 top-3 z-10 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">4.8 ★ Rated</span>
+              {%- endif -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy"
+                class="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105">
+            </a>
+            <div class="flex flex-1 flex-col px-1 pb-1 pt-4">
+              <div class="flex items-center gap-1" aria-label="5 star rating">
+                {%- for i in (1..5) -%}<span class="af-icon h-3 w-3 fill-foreground text-foreground">{{ icon_star }}</span>{%- endfor -%}
+              </div>
+              <h3 class="mt-2 text-sm font-bold leading-snug text-foreground">
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
+              <p class="mt-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                {{ product.metafields.custom.card_detail | default: product.type | default: product.vendor }}
+              </p>
+              <div class="mt-4 flex items-center justify-between gap-2">
+                <span class="text-base font-extrabold text-foreground">{{ product.price | money }}</span>
+                <button type="button" data-af-add-to-cart="{{ product.selected_or_first_available_variant.id }}"
+                  class="inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-bold uppercase tracking-wider text-background transition-transform hover:scale-105">
+                  <span class="af-icon h-3.5 w-3.5">{{ icon_plus }}</span>
+                  Add
+                </button>
+              </div>
+            </div>
+          </article>
+        {%- else -%}
+          {%- comment -%} Fallback demo cards when no collection is picked yet {%- endcomment -%}
+          {%- assign demo_names = 'Full Tank | Workout Fuel,Elevated | Natural T Booster,One Scoop Only | Pre Workout,RF-350 | Muscle Accelerator' | split: ',' -%}
+          {%- assign demo_details = 'Blue Slushy,30 Day Supply,Fruit Snacks,RipFactor® Formula' | split: ',' -%}
+          {%- assign demo_prices = '$49.95,$69.95,$49.95,$39.95' | split: ',' -%}
+          {%- assign demo_images = 'full-tank.png,elevated.png,one-scoop-only.png,rf-350.png' | split: ',' -%}
+          {%- for name in demo_names -%}
+            <article class="group flex w-[240px] shrink-0 snap-start flex-col rounded-3xl border border-border bg-card p-4 transition-colors duration-300 hover:border-primary/60 sm:w-[280px] lg:w-[calc((100%-4.5rem)/4)]">
+              <div class="card-sheen relative aspect-square overflow-hidden rounded-2xl">
+                {%- if forloop.index == 1 -%}
+                  <span class="absolute left-3 top-3 z-10 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">Best Seller</span>
+                {%- elsif forloop.index == 2 -%}
+                  <span class="absolute left-3 top-3 z-10 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">4.8 ★ Rated</span>
+                {%- endif -%}
+                <img src="{{ demo_images[forloop.index0] | asset_url }}" alt="{{ name }}" loading="lazy"
+                  class="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105">
+              </div>
+              <div class="flex flex-1 flex-col px-1 pb-1 pt-4">
+                <div class="flex items-center gap-1" aria-label="5 star rating">
+                  {%- for i in (1..5) -%}<span class="af-icon h-3 w-3 fill-foreground text-foreground">{{ icon_star }}</span>{%- endfor -%}
+                </div>
+                <h3 class="mt-2 text-sm font-bold leading-snug text-foreground">{{ name }}</h3>
+                <p class="mt-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">{{ demo_details[forloop.index0] }}</p>
+                <div class="mt-4 flex items-center justify-between gap-2">
+                  <span class="text-base font-extrabold text-foreground">{{ demo_prices[forloop.index0] }}</span>
+                  <button type="button" class="inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-bold uppercase tracking-wider text-background transition-transform hover:scale-105">
+                    <span class="af-icon h-3.5 w-3.5">{{ icon_plus }}</span>
+                    Add
+                  </button>
+                </div>
+              </div>
+            </article>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </section>
+
+    {%- comment -%} ── 3. SUBSCRIBE & SAVE ─────────────────────────────────── {%- endcomment -%}
+    <section id="subscribe-save" class="border-y border-border bg-card/40">
+      <div class="mx-auto grid max-w-7xl items-center gap-7 px-4 py-7 sm:gap-10 sm:px-6 sm:py-10 lg:grid-cols-2 lg:gap-14 lg:py-14">
+        <div>
+          <h2 class="font-display text-4xl uppercase leading-[0.95] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            Save <span class="text-primary">20%</span> with<br>performance on repeat
+          </h2>
+
+          <ul class="mt-6 grid grid-cols-2 gap-x-4 gap-y-5 sm:mt-10 sm:gap-x-6 sm:gap-y-8 sm:grid-cols-4">
+            <li class="flex flex-col items-center text-center">
+              <span class="af-icon-btn flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary text-primary"><span class="af-icon h-6 w-6">{{ icon_dollar }}</span></span>
+              <p class="mt-3 text-xs font-semibold leading-snug text-muted-foreground">20% off every order</p>
+            </li>
+            <li class="flex flex-col items-center text-center">
+              <span class="af-icon-btn flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary text-primary"><span class="af-icon h-6 w-6">{{ icon_mail }}</span></span>
+              <p class="mt-3 text-xs font-semibold leading-snug text-muted-foreground">Free shipping, always</p>
+            </li>
+            <li class="flex flex-col items-center text-center">
+              <span class="af-icon-btn flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary text-primary"><span class="af-icon h-6 w-6">{{ icon_package }}</span></span>
+              <p class="mt-3 text-xs font-semibold leading-snug text-muted-foreground">VIP member perks</p>
+            </li>
+            <li class="flex flex-col items-center text-center">
+              <span class="af-icon-btn flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary text-primary"><span class="af-icon h-6 w-6">{{ icon_pencil }}</span></span>
+              <p class="mt-3 text-xs font-semibold leading-snug text-muted-foreground">Modify, pause, or cancel anytime</p>
+            </li>
+          </ul>
+
+          <a href="{{ section.settings.subscribe_url | default: '#best-sellers' }}"
+            class="mt-6 inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 sm:mt-10 sm:px-9 sm:py-4 text-sm font-bold uppercase tracking-wider text-background transition-transform hover:scale-[1.03]">
+            Subscribe &amp; Save
+            <span class="af-icon h-4 w-4">{{ icon_arrow_right }}</span>
+          </a>
+        </div>
+
+        <div class="relative mx-auto w-full max-w-[320px] sm:max-w-md lg:max-w-none">
+          {%- if section.settings.subscribe_image != blank -%}
+            {%- assign sub_img = section.settings.subscribe_image | image_url: width: 1200 -%}
+          {%- else -%}
+            {%- assign sub_img = 'bundle.jpg' | asset_url -%}
+          {%- endif -%}
+          <img src="{{ sub_img }}" alt="AstroFlav subscription box of performance supplements" loading="lazy"
+            class="aspect-[16/10] w-full rounded-2xl border border-border object-cover sm:aspect-[4/3] sm:rounded-3xl">
+          <span class="absolute -left-2 top-4 -rotate-6 rounded-full bg-primary px-4 py-2 font-display text-lg uppercase tracking-wide text-primary-foreground shadow-xl sm:-left-6 sm:top-6 sm:px-6 sm:py-3 sm:text-3xl">Save 20%</span>
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} ── 4. CATEGORY TILES ───────────────────────────────────── {%- endcomment -%}
+    <section id="categories" class="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:py-14">
+      <div class="text-center">
+        <span class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Find your lane</span>
+        <h2 class="mt-3 font-display text-3xl uppercase sm:mt-4 leading-none tracking-tight text-foreground sm:text-5xl">Premium performance supplements</h2>
+      </div>
+
+      <div class="mx-auto mt-6 grid max-w-md grid-cols-2 gap-2.5 sm:max-w-none sm:gap-4 lg:mt-12 lg:grid-cols-4 lg:gap-6">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category' -%}
+            {%- if block.settings.image != blank -%}
+              {%- assign cat_img = block.settings.image | image_url: width: 900 -%}
+            {%- else -%}
+              {%- assign cat_img = block.settings.fallback_asset | asset_url -%}
+            {%- endif -%}
+            <a href="{{ block.settings.url | default: '#best-sellers' }}" {{ block.shopify_attributes }}
+              class="group relative block aspect-[5/4] overflow-hidden rounded-xl border border-border sm:aspect-[4/5] sm:rounded-3xl">
+              <img src="{{ cat_img }}" alt="{{ block.settings.label | escape }}" loading="lazy"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105">
+              <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" aria-hidden="true"></div>
+              <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-1.5 p-2 sm:p-5">
+                <div class="min-w-0">
+                  <h3 class="font-display text-[13px] uppercase leading-tight tracking-wide text-foreground sm:text-xl lg:text-2xl">{{ block.settings.label }}</h3>
+                  <p class="mt-0.5 text-[9px] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs">{{ block.settings.copy }}</p>
+                </div>
+                <span class="af-icon-btn flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-110 sm:h-10 sm:w-10">
+                  <span class="af-icon h-3 w-3 sm:h-5 sm:w-5">{{ icon_arrow_up_right }}</span>
+                </span>
+              </div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </section>
+
+    {%- comment -%} ── 5. UGC VIDEO CAROUSEL ───────────────────────────────── {%- endcomment -%}
+    <section id="community" class="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:py-14">
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Community</span>
+          <h2 class="mt-3 font-display text-3xl uppercase sm:mt-4 leading-none tracking-tight text-foreground sm:text-5xl">
+            Real people. <span class="text-primary">Real results.</span>
+          </h2>
+        </div>
+        <div class="hidden gap-2 sm:flex">
+          <button type="button" data-af-scroll="ugc-track" data-af-dir="-1" data-af-step="300" aria-label="Scroll videos left"
+            class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
+            <span class="af-icon h-5 w-5">{{ icon_arrow_left }}</span>
+          </button>
+          <button type="button" data-af-scroll="ugc-track" data-af-dir="1" data-af-step="300" aria-label="Scroll videos right"
+            class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
+            <span class="af-icon h-5 w-5">{{ icon_arrow_right }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="ugc-track" class="mt-6 flex snap-x sm:mt-10 snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-6">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'ugc' -%}
+            <div {{ block.shopify_attributes }} class="group relative w-[240px] shrink-0 snap-start overflow-hidden rounded-3xl border border-border bg-card sm:w-[280px]">
+              <div class="relative aspect-[9/16]">
+                <video data-af-video
+                  src="{{ block.settings.video_url }}"
+                  poster="{% if block.settings.poster != blank %}{{ block.settings.poster | image_url: width: 800 }}{% else %}{{ block.settings.fallback_poster | asset_url }}{% endif %}"
+                  muted loop playsinline preload="metadata"
+                  class="h-full w-full object-cover"></video>
+                <button type="button" data-af-video-toggle aria-label="Play {{ block.settings.title | escape }}"
+                  class="absolute inset-0 flex items-center justify-center bg-background/30 transition-opacity opacity-100">
+                  <span class="flex h-14 w-14 items-center justify-center rounded-full bg-foreground text-background shadow-xl transition-transform hover:scale-110">
+                    <span class="af-icon ml-0.5 h-6 w-6">{{ icon_play_filled }}</span>
+                  </span>
+                </button>
+              </div>
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-4 pt-10">
+                <p class="text-sm font-bold text-foreground">{{ block.settings.title }}</p>
+                <p class="text-xs font-medium text-muted-foreground">{{ block.settings.handle }}</p>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </section>
+  </main>
+
+  {%- if section.settings.show_footer -%}
+  {%- comment -%} ── FOOTER ────────────────────────────────────────────────── {%- endcomment -%}
+  <footer class="border-t border-border bg-background">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <div class="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
+        <div>
+          <a href="{{ routes.root_url }}" aria-label="AstroFlav home" class="inline-flex items-center">
+            <img src="{{ 'astroflav-logo.png' | asset_url }}" alt="AstroFlav" class="h-9 w-auto">
+          </a>
+          <p class="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            Premium performance supplements. USA made, third-party tested, and never any fillers or added sugar.
+          </p>
+
+          {%- form 'customer', class: 'mt-6 flex max-w-sm items-center gap-2' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <label for="newsletter-email" class="sr-only">Email address</label>
+            <input id="newsletter-email" type="email" name="contact[email]" required placeholder="Email for exclusive drops"
+              class="h-12 w-full rounded-full border border-input bg-card px-5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring">
+            <button type="submit" aria-label="Subscribe"
+              class="af-icon-btn flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105">
+              <span class="af-icon h-5 w-5">{{ icon_arrow_right }}</span>
+            </button>
+          {%- endform -%}
+
+          <div class="mt-6 flex gap-2">
+            <a href="{{ section.settings.instagram_url | default: '/' }}" aria-label="Instagram" class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"><span class="af-icon h-5 w-5">{{ icon_instagram }}</span></a>
+            <a href="{{ section.settings.facebook_url | default: '/' }}" aria-label="Facebook" class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"><span class="af-icon h-5 w-5">{{ icon_facebook }}</span></a>
+            <a href="{{ section.settings.twitter_url | default: '/' }}" aria-label="Twitter" class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"><span class="af-icon h-5 w-5">{{ icon_twitter }}</span></a>
+            <a href="{{ section.settings.youtube_url | default: '/' }}" aria-label="YouTube" class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"><span class="af-icon h-5 w-5">{{ icon_youtube }}</span></a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Shop</h3>
+            <ul class="mt-5 space-y-3">
+              <li><a href="/collections/all" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Supplements</a></li>
+              <li><a href="/collections/stacks" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Stacks</a></li>
+              <li><a href="#categories" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Bundle Builder</a></li>
+              <li><a href="#best-sellers" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Best Sellers</a></li>
+              <li><a href="/products/gift-card" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Gift Cards</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Company</h3>
+            <ul class="mt-5 space-y-3">
+              <li><a href="/pages/about" class="text-sm text-muted-foreground transition-colors hover:text-foreground">About Us</a></li>
+              <li><a href="/blogs/news" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Articles</a></li>
+              <li><a href="/pages/guarantee" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Our Guarantee</a></li>
+              <li><a href="/pages/wholesale" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Wholesale</a></li>
+              <li><a href="/pages/ambassadors" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Ambassadors</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Support</h3>
+            <ul class="mt-5 space-y-3">
+              <li><a href="/pages/faq" class="text-sm text-muted-foreground transition-colors hover:text-foreground">FAQ</a></li>
+              <li><a href="/policies/shipping-policy" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Shipping</a></li>
+              <li><a href="/policies/refund-policy" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Returns</a></li>
+              <li><a href="/pages/contact" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Contact Us</a></li>
+              <li><a href="/policies/privacy-policy" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
+        <p class="text-xs text-muted-foreground">&copy; {{ 'now' | date: '%Y' }} AstroFlav. All rights reserved.</p>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">USA Made &bull; Third-Party Tested &bull; No Fillers</p>
+      </div>
+    </div>
+  </footer>
+  {%- endif -%}
+</div>
+
+<script src="{{ 'astroflav-home.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "AstroFlav Homepage",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "show_header", "label": "Show AstroFlav header (turn off to keep your theme header)", "default": true },
+    { "type": "checkbox", "id": "show_footer", "label": "Show AstroFlav footer (turn off to keep your theme footer)", "default": true },
+
+    { "type": "header", "content": "Announcement bar" },
+    { "type": "text", "id": "announcement_1", "label": "Message 1", "default": "Free U.S. priority shipping on orders over $99" },
+    { "type": "text", "id": "announcement_2", "label": "Message 2", "default": "Buy any 3 products & save 10% — build your bundle" },
+
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Eyebrow", "default": "Natural Testosterone Support" },
+    { "type": "text", "id": "hero_title", "label": "Headline", "default": "Elevated" },
+    { "type": "textarea", "id": "hero_subtitle", "label": "Sub-headline (one line each)", "default": "More energy.\nMore strength.\nMore drive." },
+    { "type": "textarea", "id": "hero_copy", "label": "Description", "default": "A natural testosterone support formula created to help increase drive, strength, endurance, and lean muscle mass." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero product image (defaults to uploaded elevated-bottle.png)" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "AstroFlav Elevated advanced testosterone booster, 120 capsules" },
+    { "type": "product", "id": "hero_product", "label": "Hero product (powers Add to cart)" },
+    { "type": "text", "id": "hero_cta_label", "label": "CTA label", "default": "Shop Elevated" },
+    { "type": "url", "id": "hero_cta_url", "label": "CTA fallback link (used when no product is selected)" },
+    { "type": "text", "id": "hero_servings", "label": "CTA sub-label", "default": "30 Servings · 120 Capsules" },
+    { "type": "text", "id": "hero_proof", "label": "Proof pills (separate with |)", "default": "USA Made|Third-Party Tested|No Fillers|30-Day Money-Back Guarantee" },
+    { "type": "textarea", "id": "hero_blend", "label": "Blend line", "default": "A powerful blend of Tongkat Ali, Fadogia Agrestis, and KSM-66 Ashwagandha." },
+    { "type": "textarea", "id": "hero_ingredients", "label": "Ingredients — one per line, 'Name :: detail'", "default": "Tongkat Ali :: Root extract · drive + stamina\nKSM-66 Ashwagandha :: Full-spectrum root · resilience\nFadogia Agrestis :: Standardized extract · vitality" },
+
+    { "type": "header", "content": "Best sellers" },
+    { "type": "collection", "id": "best_sellers_collection", "label": "Collection" },
+    { "type": "range", "id": "best_sellers_limit", "label": "Products shown", "min": 4, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Free shipping on US orders over $99" },
+
+    { "type": "header", "content": "Subscribe & Save" },
+    { "type": "image_picker", "id": "subscribe_image", "label": "Image (defaults to uploaded bundle.jpg)" },
+    { "type": "url", "id": "subscribe_url", "label": "Button link" },
+
+    { "type": "header", "content": "Footer social links" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook" },
+    { "type": "url", "id": "twitter_url", "label": "Twitter" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category tile",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Supplements" },
+        { "type": "text", "id": "copy", "label": "Sub-copy", "default": "Singles for every goal" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback_asset", "label": "Fallback asset filename", "default": "supplements.jpg" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    },
+    {
+      "type": "ugc",
+      "name": "UGC video",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Morning stack routine" },
+        { "type": "text", "id": "handle", "label": "Handle", "default": "@customer" },
+        { "type": "text", "id": "video_url", "label": "Video URL (upload to Files, paste the URL)" },
+        { "type": "image_picker", "id": "poster", "label": "Poster image" },
+        { "type": "text", "id": "fallback_poster", "label": "Fallback poster asset filename", "default": "supplements.jpg" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AstroFlav Homepage",
+      "blocks": [
+        { "type": "category", "settings": { "label": "Supplements", "copy": "Singles for every goal", "fallback_asset": "supplements.jpg" } },
+        { "type": "category", "settings": { "label": "Stacks", "copy": "Goal-matched combos", "fallback_asset": "stacks.jpg" } },
+        { "type": "category", "settings": { "label": "Bundle & Save", "copy": "Build yours, save 20%", "fallback_asset": "bundle.jpg" } },
+        { "type": "category", "settings": { "label": "Pre / Intra Workout", "copy": "Fuel every session", "fallback_asset": "pre-intra.png" } },
+        { "type": "ugc", "settings": { "title": "Morning stack routine", "fallback_poster": "supplements.jpg" } },
+        { "type": "ugc", "settings": { "title": "Pre-workout fuel up", "fallback_poster": "pre-intra.png" } },
+        { "type": "ugc", "settings": { "title": "30 days on Elevated", "fallback_poster": "stacks.jpg" } },
+        { "type": "ugc", "settings": { "title": "Unboxing the bundle", "fallback_poster": "bundle.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

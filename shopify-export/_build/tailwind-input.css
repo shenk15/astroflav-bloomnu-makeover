@@ -1,0 +1,260 @@
+/* Build input used to compile shopify-export/assets/astroflav-home.css.
+   Not shipped to Shopify — see README. */
+/* Tailwind WITHOUT preflight: a global reset would fight the existing Shopify
+   theme (product pages, cart, apps). A scoped reset is applied below instead. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme) source(none);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "../sections";
+@source "../assets/astroflav-home.js";
+@source inline("opacity-0 opacity-100 group-hover:opacity-100 bg-primary bg-primary/40 border-primary/50");
+
+@theme {
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Anton", "Archivo", ui-sans-serif, sans-serif;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.13 0 0);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.17 0 0);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.17 0 0);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.8 0.128 209); /* #49d6f3 */
+  --primary-foreground: oklch(0.16 0 0);
+  --secondary: oklch(0.21 0 0);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.21 0 0);
+  --muted-foreground: oklch(1 0 0);
+  --accent: oklch(0.24 0 0);
+  --accent-foreground: oklch(0.97 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.8 0.128 209);
+}
+
+/* Scoped base styles — applied to the AstroFlav block only so the rest of the
+   theme (product pages, cart, apps) is untouched. This replaces Tailwind's
+   global preflight with the same normalisation, scoped to this section.
+   Wrapped in @layer base and written with :where() so every Tailwind utility
+   still overrides it. */
+@layer base {
+  .astroflav-root {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .astroflav-root,
+  :where(.astroflav-root *, .astroflav-root *::before, .astroflav-root *::after) {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--color-border);
+  }
+
+  :where(
+    .astroflav-root h1, .astroflav-root h2, .astroflav-root h3,
+    .astroflav-root h4, .astroflav-root p, .astroflav-root ul,
+    .astroflav-root ol, .astroflav-root figure, .astroflav-root form
+  ) {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: none;
+  }
+
+  :where(.astroflav-root ul, .astroflav-root ol) {
+    list-style: none;
+  }
+
+  :where(.astroflav-root a) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :where(.astroflav-root img, .astroflav-root svg, .astroflav-root video) {
+    display: block;
+    max-width: 100%;
+  }
+
+  :where(.astroflav-root button, .astroflav-root input) {
+    font: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    appearance: none;
+  }
+
+  :where(.astroflav-root button) {
+    cursor: pointer;
+    text-transform: none;
+  }
+
+  :where(.astroflav-root input)::placeholder {
+    color: var(--color-muted-foreground);
+    opacity: 1;
+  }
+
+  .astroflav-root ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+@layer components {
+  /* Inline SVG icon wrapper — replaces lucide-react components. */
+  .astroflav-root .af-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .astroflav-root .af-icon > svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .astroflav-root .af-icon-btn > .af-icon > svg,
+  .astroflav-root .af-icon.fill-foreground > svg {
+    fill: inherit;
+  }
+  .astroflav-root .af-icon.fill-foreground > svg {
+    fill: currentColor;
+  }
+
+  /* Announcement bar fade (replaces the React `animate-fade-in` key remount). */
+  @keyframes af-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .astroflav-root .af-fade {
+    animation: af-fade-in 0.35s ease both;
+  }
+
+  /* Soft cyan glow behind hero product */
+  .astroflav-root .hero-glow {
+    background: radial-gradient(
+      ellipse 62% 55% at 50% 48%,
+      color-mix(in oklab, var(--primary) 26%, transparent),
+      transparent 72%
+    );
+  }
+
+  /* Product card image backdrop: subtle gray radial lift */
+  .astroflav-root .card-sheen {
+    background: radial-gradient(
+      circle at 50% 32%,
+      color-mix(in oklab, var(--foreground) 9%, var(--card)),
+      var(--card) 78%
+    );
+  }
+
+  /* Hero product float + technical ring pulse */
+  @keyframes hero-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+  @keyframes ring-pulse {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.04); }
+  }
+  .astroflav-root .animate-hero-float {
+    animation: hero-float 7s ease-in-out infinite;
+  }
+  .astroflav-root .animate-ring-pulse {
+    animation: ring-pulse 6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .astroflav-root .animate-hero-float,
+    .astroflav-root .animate-ring-pulse {
+      animation: none !important;
+    }
+  }
+
+  /* Cinematic hero treatment */
+  .astroflav-root .ingredient-hero {
+    position: relative;
+    min-height: 520px;
+    overflow: hidden;
+    color: #f4f1e9;
+    background: #0b0e10;
+  }
+
+  @media (min-width: 1024px) {
+    .astroflav-root .ingredient-hero {
+      min-height: 680px;
+    }
+  }
+
+  .astroflav-root .ingredient-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url("hero-botanical.jpg");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.52;
+  }
+
+  .astroflav-root .ingredient-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse at 50% 48%, rgba(7, 14, 16, 0.05), rgba(5, 7, 8, 0.88) 72%),
+      linear-gradient(90deg, rgba(8, 11, 12, 0.95) 0%, rgba(8, 11, 12, 0.24) 34%, rgba(8, 11, 12, 0.12) 58%, rgba(8, 11, 12, 0.82) 100%);
+  }
+
+  .astroflav-root .ingredient-hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .astroflav-root [hidden] {
+    display: none !important;
+  }
+}

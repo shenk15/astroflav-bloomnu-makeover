@@ -1,0 +1,84 @@
+{
+  "sections": {
+    "astroflav-home": {
+      "type": "astroflav-home",
+      "blocks": {
+        "cat-1": {
+          "type": "category",
+          "settings": {
+            "label": "Supplements",
+            "copy": "Singles for every goal",
+            "fallback_asset": "supplements.jpg"
+          }
+        },
+        "cat-2": {
+          "type": "category",
+          "settings": {
+            "label": "Stacks",
+            "copy": "Goal-matched combos",
+            "fallback_asset": "stacks.jpg"
+          }
+        },
+        "cat-3": {
+          "type": "category",
+          "settings": {
+            "label": "Bundle & Save",
+            "copy": "Build yours, save 20%",
+            "fallback_asset": "bundle.jpg"
+          }
+        },
+        "cat-4": {
+          "type": "category",
+          "settings": {
+            "label": "Pre / Intra Workout",
+            "copy": "Fuel every session",
+            "fallback_asset": "pre-intra.png"
+          }
+        },
+        "ugc-1": {
+          "type": "ugc",
+          "settings": {
+            "title": "Morning stack routine",
+            "handle": "@customer",
+            "fallback_poster": "supplements.jpg"
+          }
+        },
+        "ugc-2": {
+          "type": "ugc",
+          "settings": {
+            "title": "Pre-workout fuel up",
+            "handle": "@customer",
+            "fallback_poster": "pre-intra.png"
+          }
+        },
+        "ugc-3": {
+          "type": "ugc",
+          "settings": {
+            "title": "30 days on Elevated",
+            "handle": "@customer",
+            "fallback_poster": "stacks.jpg"
+          }
+        },
+        "ugc-4": {
+          "type": "ugc",
+          "settings": {
+            "title": "Unboxing the bundle",
+            "handle": "@customer",
+            "fallback_poster": "bundle.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "cat-1",
+        "cat-2",
+        "cat-3",
+        "cat-4",
+        "ugc-1",
+        "ugc-2",
+        "ugc-3",
+        "ugc-4"
+      ]
+    }
+  },
+  "order": ["astroflav-home"]
+}
