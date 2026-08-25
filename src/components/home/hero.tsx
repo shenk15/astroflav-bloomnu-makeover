@@ -5,7 +5,7 @@ import { addToBag } from "@/lib/cart-store";
 const ingredients = [
   { name: "Tongkat Ali", detail: "Root extract · drive + stamina", index: "01" },
   { name: "KSM-66 Ashwagandha", detail: "Full-spectrum root · resilience", index: "02" },
-  { name: "Fadogia Agrestis", detail: "Botanical extract · vitality", index: "03" },
+  { name: "Fadogia Agrestis", detail: "Standardized extract · vitality", index: "03" },
 ];
 
 const proofPoints = ["USA Made", "Third-Party Tested", "No Fillers"];
