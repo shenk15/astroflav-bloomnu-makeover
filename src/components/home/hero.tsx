@@ -2,11 +2,10 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { addToBag } from "@/lib/cart-store";
 
-const benefits = [
-  { name: "Increases Libido", index: "01" },
-  { name: "Improves Strength & Endurance", index: "02" },
-  { name: "Creates Lean Muscle Mass", index: "03" },
-  { name: "Natural Testosterone Augmentation", index: "04" },
+const ingredients = [
+  { name: "Tongkat Ali", detail: "Root extract · drive + stamina", index: "01" },
+  { name: "KSM-66 Ashwagandha", detail: "Full-spectrum root · resilience", index: "02" },
+  { name: "Fadogia Agrestis", detail: "Botanical extract · vitality", index: "03" },
 ];
 
 const proofPoints = ["USA Made", "Third-Party Tested", "No Fillers"];
