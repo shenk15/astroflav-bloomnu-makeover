@@ -1,24 +1,65 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SiteHeader } from "@/components/home/site-header";
+import { Hero } from "@/components/home/hero";
+import { TrustMarquee } from "@/components/home/trust-marquee";
+import { BestSellers } from "@/components/home/best-sellers";
+import { BundleSave } from "@/components/home/bundle-save";
+import { CategoryTiles } from "@/components/home/category-tiles";
+import { ElevatedSpotlight } from "@/components/home/elevated-spotlight";
+import { QuizCta } from "@/components/home/quiz-cta";
+import { Faq } from "@/components/home/faq";
+import { SiteFooter } from "@/components/home/site-footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "AstroFlav | Premium Performance Supplements" },
+      {
+        name: "description",
+        content:
+          "Shop AstroFlav best sellers — Elevated T-Booster, Full Tank workout fuel, One Scoop Only pre-workout and more. USA made, third-party tested, no fillers. Free shipping over $99.",
+      },
+      { property: "og:title", content: "AstroFlav | Premium Performance Supplements" },
+      {
+        property: "og:description",
+        content:
+          "Shop AstroFlav best sellers — Elevated T-Booster, Full Tank workout fuel, One Scoop Only pre-workout and more. USA made, third-party tested, no fillers.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "AstroFlav",
+          url: "https://astroflav.com",
+          description:
+            "Premium performance supplements — USA made, third-party tested, no fillers.",
+        }),
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background text-foreground">
+      <SiteHeader />
+      <main>
+        <Hero />
+        <TrustMarquee />
+        <BestSellers />
+        <BundleSave />
+        <CategoryTiles />
+        <ElevatedSpotlight />
+        <QuizCta />
+        <Faq />
+      </main>
+      <SiteFooter />
     </div>
   );
 }
