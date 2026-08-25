@@ -46,9 +46,11 @@ const plugin = {
   },
 };
 plugin.postcss = true;
+const pluginFactory = () => plugin;
+pluginFactory.postcss = true;
 
 const [, , inFile, outFile] = process.argv;
 const css = readFileSync(inFile, "utf8");
-const out = await postcss([plugin]).process(css, { from: inFile, to: outFile });
+const out = await postcss([pluginFactory]).process(css, { from: inFile, to: outFile });
 writeFileSync(outFile, out.css);
 console.log("hardened ->", outFile, out.css.length, "bytes");
