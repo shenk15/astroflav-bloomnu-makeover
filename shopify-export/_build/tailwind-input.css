@@ -291,3 +291,59 @@
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
+
+/* ---------------------------------------------------------------
+   Theme neutralisation. Many Shopify themes ship !important rules
+   on generic elements (ul/li bullets, heading margins, serif font
+   stacks, forced img height). These are scoped to .astroflav-root
+   and get tripled specificity by _build/harden.mjs, so they win
+   inside this section only — the rest of the store is untouched. */
+.astroflav-root ul,
+.astroflav-root ol,
+.astroflav-root li {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.astroflav-root h1,
+.astroflav-root h2,
+.astroflav-root h3,
+.astroflav-root h4,
+.astroflav-root h5,
+.astroflav-root h6,
+.astroflav-root p,
+.astroflav-root figure,
+.astroflav-root blockquote,
+.astroflav-root dl,
+.astroflav-root dd {
+  margin: 0 !important;
+}
+.astroflav-root,
+.astroflav-root h1, .astroflav-root h2, .astroflav-root h3,
+.astroflav-root h4, .astroflav-root h5, .astroflav-root h6,
+.astroflav-root p, .astroflav-root a, .astroflav-root span,
+.astroflav-root li, .astroflav-root button, .astroflav-root input,
+.astroflav-root select, .astroflav-root textarea, .astroflav-root label {
+  font-family: inherit !important;
+  color: inherit !important;
+  text-transform: none;
+}
+.astroflav-root img,
+.astroflav-root video,
+.astroflav-root svg,
+.astroflav-root canvas {
+  max-width: 100%;
+  display: block;
+}
+.astroflav-root a { text-decoration: none !important; }
+.astroflav-root button,
+.astroflav-root input,
+.astroflav-root select,
+.astroflav-root textarea {
+  background: none;
+  border-radius: 0;
+  letter-spacing: inherit;
+  min-height: 0 !important;
+  box-shadow: none;
+}
+.astroflav-root * { float: none !important; }
