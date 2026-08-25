@@ -5,6 +5,12 @@ Product pages, cart, checkout, apps, and the rest of your theme are untouched:
 everything here is scoped to `.astroflav-root` and nothing overrides theme CSS
 globally (Tailwind's global reset is deliberately **not** included).
 
+The compiled homepage utilities use `!important` deliberately. Many Shopify
+themes apply `!important` to generic layout helpers such as `.hidden`; without
+matching that priority, the desktop hero bottle and responsive grids can be
+incorrectly hidden or collapsed. Only utilities present in this homepage are
+compiled, and the design tokens/base styles remain scoped to `.astroflav-root`.
+
 ## Files
 
 | File | Goes to | What it is |
