@@ -224,8 +224,8 @@
     </section>
 
     {%- comment -%} ── 2. BEST SELLERS carousel ────────────────────────────── {%- endcomment -%}
-    <section id="best-sellers" class="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:py-14">
-      <div class="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:justify-between">
+    <section id="best-sellers" class="af-best-sellers mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:py-14">
+      <div class="af-best-sellers-head grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:justify-between">
         <div class="min-w-0">
           <h2 class="font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
             Shop our <span class="text-primary">best sellers</span>
@@ -235,7 +235,7 @@
             {{ section.settings.shipping_note }}
           </p>
         </div>
-        <div class="flex shrink-0 gap-2">
+        <div class="af-best-sellers-controls flex shrink-0 gap-2">
           <button type="button" data-af-scroll="best-sellers-track" data-af-dir="-1" aria-label="Previous products"
             class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
             <span class="af-icon h-5 w-5">{{ icon_chevron_left }}</span>
