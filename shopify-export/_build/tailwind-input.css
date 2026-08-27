@@ -417,3 +417,10 @@
   container-type: normal !important;
 }
 .astroflav-root [class*="rotate-"] { font-style: normal !important; }
+
+/* Force uppercase headings — some themes set text-transform: lowercase */
+.astroflav-root .uppercase,
+.astroflav-root .font-display,
+.astroflav-root h1, .astroflav-root h2, .astroflav-root h3 {
+  text-transform: uppercase !important;
+}
