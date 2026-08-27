@@ -59,42 +59,48 @@
       });
     });
 
-    /* ── 4. UGC click-to-play (was useState playing/missing per card) ── */
-    root.querySelectorAll("[data-af-video-toggle]").forEach(function (btn) {
-      var card = btn.closest(".group");
-      var video = card && card.querySelector("[data-af-video]");
-      if (!video) return;
+    /* ── 4. UGC click-to-open lightbox with sound ── */
+    var modal = root.querySelector("[data-af-video-modal]");
+    var modalVideo = root.querySelector("[data-af-modal-video]");
 
-      if (!video.getAttribute("src")) {
-        btn.classList.remove("bg-background/30");
-        return;
+    function closeVideoModal() {
+      if (!modal) return;
+      if (modalVideo) {
+        modalVideo.pause();
+        modalVideo.removeAttribute("src");
+        modalVideo.load();
       }
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+    }
 
-      var setPlaying = function (playing) {
-        btn.classList.toggle("opacity-0", playing);
-        btn.classList.toggle("group-hover:opacity-100", playing);
-        btn.classList.toggle("opacity-100", !playing);
-        btn.setAttribute(
-          "aria-label",
-          (playing ? "Pause " : "Play ") + (card.querySelector("p") ? card.querySelector("p").textContent : "video")
-        );
-      };
-
-      btn.addEventListener("click", function () {
-        if (video.paused) {
-          var p = video.play();
-          if (p && p.catch) p.catch(function () {});
-          setPlaying(true);
-        } else {
-          video.pause();
-          setPlaying(false);
+    if (modal && modalVideo) {
+      root.querySelectorAll("[data-af-video-toggle]").forEach(function (btn) {
+        var card = btn.closest(".group");
+        var video = card && card.querySelector("[data-af-video]");
+        var src = video && video.getAttribute("src");
+        if (!src) {
+          btn.style.display = "none";
+          return;
         }
+        btn.addEventListener("click", function () {
+          modalVideo.src = src;
+          modalVideo.muted = false;
+          modal.style.display = "flex";
+          document.body.style.overflow = "hidden";
+          var p = modalVideo.play();
+          if (p && p.catch) p.catch(function () {});
+        });
       });
-      video.addEventListener("ended", function () { setPlaying(false); });
-      video.addEventListener("error", function () {
-        btn.style.display = "none";
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) closeVideoModal();
       });
-    });
+      var closeBtn = modal.querySelector("[data-af-video-close]");
+      if (closeBtn) closeBtn.addEventListener("click", closeVideoModal);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeVideoModal();
+      });
+    }
 
     /* ── 5. Hero ingredient toggle (was activeIngredient state) ── */
     var ingredients = root.querySelectorAll("[data-af-ingredient]");
