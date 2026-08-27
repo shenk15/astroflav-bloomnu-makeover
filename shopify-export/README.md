@@ -85,3 +85,59 @@ npx @tailwindcss/cli \
 ```
 
 The build input scans `sections/` and `assets/astroflav-home.js`, so any class you add there is picked up automatically.
+
+---
+
+# AstroFlav product page — one template for every product
+
+`sections/astroflav-product.liquid` + `templates/product.astroflav.json` render
+**every** product with the same AstroFlav/Bloom-style layout. Title, images,
+variants, price, description, availability, and related products all come from
+Shopify, so you never rebuild a page per product — you just assign the template.
+
+## Install
+
+1. **Assets → Add a new asset**: upload `assets/astroflav-product.css` and
+   `assets/astroflav-product.js` (the image assets are the same ones the
+   homepage uses — if they're already uploaded, skip them).
+2. **Sections → Add a new section** → name it `astroflav-product` → paste in
+   `sections/astroflav-product.liquid`.
+3. **Templates → Add a new template** → for **product** → *JSON* → name it
+   `astroflav` → replace its contents with `templates/product.astroflav.json`.
+4. Assign the template to products:
+   - one product: Admin → Products → *product* → **Theme template → astroflav**
+   - all products: Products → select all → **Bulk edit** → add the *Theme
+     template* column → set `astroflav` → Save.
+
+## What's on the page
+
+Gallery with thumbnails · title, rating row, price/compare-at · variant pills ·
+one-time vs **Subscribe & Save** (shown automatically when the product has
+selling plans from your subscription app) · quantity stepper · AJAX add to cart ·
+proof pills + free-shipping line · benefit icon row · key ingredients ·
+Description / How to use / Supplement facts / FAQ accordions · UGC video
+carousel with sound-on lightbox · "You may also like" carousel · sticky mobile
+buy bar · matching header + footer (both toggleable in section settings).
+
+## Per-product content (optional metafields)
+
+Create these under Settings → Custom data → Products. Every one has a fallback
+in the section settings, so products without them still look complete.
+
+| Metafield | Type | Format |
+|---|---|---|
+| `custom.card_detail` | Single line text | Subtitle/eyebrow, e.g. "30 Day Supply" |
+| `custom.benefits` | Multi-line text | One per line — `Label :: detail` (first 4 used) |
+| `custom.ingredients` | Multi-line text | One per line — `Name :: detail` |
+| `custom.how_to_use` | Multi-line text | Directions |
+| `custom.supplement_facts` | Multi-line text | Panel copy |
+| `custom.faq` | Multi-line text | One per line — `Question :: answer` |
+
+## Notes
+
+- Add to cart posts to `/cart/add.js` (with `selling_plan` when Subscribe &
+  Save is selected), so your existing cart, checkout, and apps keep working.
+- CSS is the same hardened, `.astroflav-root`-scoped build as the homepage —
+  it can't leak into the rest of the theme, and the theme can't break it.
+- Regenerate CSS after editing classes:
+  `bunx @tailwindcss/cli -i _build/tailwind-input.css -o /tmp/raw.css --minify && bun _build/harden.mjs /tmp/raw.css assets/astroflav-home.css && cp assets/astroflav-home.css assets/astroflav-product.css`
