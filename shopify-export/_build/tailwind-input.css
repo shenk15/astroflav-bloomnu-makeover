@@ -397,3 +397,23 @@
 
 .astroflav-root { font-family: var(--font-sans) !important; -webkit-font-smoothing: antialiased; }
 .astroflav-root .font-display, .astroflav-root [class*="font-display"] { font-family: var(--font-display) !important; }
+
+/* ---------------------------------------------------------------
+   Hard neutralisation of theme layout/typography leakage.
+   Horizon (and many OS 2.0 themes) style bare `.grid`, `.flex`,
+   `.card` etc. with grid-template-areas + italic display fonts.
+   grid-template-areas creates phantom columns that shrink our
+   real columns, which is what collapsed Subscribe & Save. */
+.astroflav-root,
+.astroflav-root * {
+  grid-template-areas: none !important;
+  grid-area: auto !important;
+  font-style: normal !important;
+  font-synthesis: none !important;
+  font-stretch: normal !important;
+  font-variant: normal !important;
+  text-indent: 0 !important;
+  writing-mode: horizontal-tb !important;
+  container-type: normal !important;
+}
+.astroflav-root [class*="rotate-"] { font-style: normal !important; }
