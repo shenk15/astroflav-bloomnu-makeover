@@ -61,7 +61,16 @@
 
     /* ── 4. UGC click-to-open lightbox with sound ── */
     var modal = root.querySelector("[data-af-video-modal]");
-    var modalVideo = root.querySelector("[data-af-modal-video]");
+    var modalVideo = modal && modal.querySelector("[data-af-modal-video]");
+
+    /* Move the lightbox to <body> so theme transforms/overflow/z-index can't trap it. */
+    if (modal && modal.parentNode !== document.body) document.body.appendChild(modal);
+
+    function setStyles(el, styles) {
+      Object.keys(styles).forEach(function (k) {
+        el.style.setProperty(k, styles[k], "important");
+      });
+    }
 
     function closeVideoModal() {
       if (!modal) return;
@@ -70,28 +79,49 @@
         modalVideo.removeAttribute("src");
         modalVideo.load();
       }
-      modal.style.display = "none";
+      setStyles(modal, { display: "none" });
       document.body.style.overflow = "";
     }
 
     if (modal && modalVideo) {
+      setStyles(modal, {
+        position: "fixed",
+        inset: "0",
+        top: "0", right: "0", bottom: "0", left: "0",
+        "z-index": "2147483647",
+        "align-items": "center",
+        "justify-content": "center",
+        background: "rgba(0,0,0,.92)",
+        padding: "16px",
+        display: "none",
+        visibility: "visible",
+        opacity: "1"
+      });
+
       root.querySelectorAll("[data-af-video-toggle]").forEach(function (btn) {
-        var card = btn.closest(".group");
+        var card = btn.closest("[data-af-video-card]") || btn.parentNode.parentNode;
         var video = card && card.querySelector("[data-af-video]");
-        var src = video && video.getAttribute("src");
-        if (!src) {
-          btn.style.display = "none";
-          return;
-        }
-        btn.addEventListener("click", function () {
-          modalVideo.src = src;
+        var src =
+          btn.getAttribute("data-af-video-src") ||
+          (video && (video.getAttribute("src") || (video.querySelector("source") && video.querySelector("source").getAttribute("src"))));
+        if (!src) return;
+        btn.style.cursor = "pointer";
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (video) { try { video.pause(); } catch (err) {} }
+          modalVideo.setAttribute("src", src);
           modalVideo.muted = false;
-          modal.style.display = "flex";
+          modalVideo.volume = 1;
+          modalVideo.controls = true;
+          setStyles(modal, { display: "flex" });
           document.body.style.overflow = "hidden";
+          modalVideo.load();
           var p = modalVideo.play();
-          if (p && p.catch) p.catch(function () {});
+          if (p && p.catch) p.catch(function () { modalVideo.muted = true; modalVideo.play(); });
         });
       });
+
       modal.addEventListener("click", function (e) {
         if (e.target === modal) closeVideoModal();
       });
