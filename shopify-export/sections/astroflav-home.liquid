@@ -424,14 +424,14 @@
       <div id="ugc-track" class="mt-6 flex snap-x sm:mt-10 snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-6">
         {%- for block in section.blocks -%}
           {%- if block.type == 'ugc' -%}
-            <div {{ block.shopify_attributes }} class="group relative w-[240px] shrink-0 snap-start overflow-hidden rounded-3xl border border-border bg-card sm:w-[280px]">
+            <div {{ block.shopify_attributes }} data-af-video-card class="group relative w-[240px] shrink-0 snap-start overflow-hidden rounded-3xl border border-border bg-card sm:w-[280px]">
               <div class="relative aspect-[9/16]">
                 <video data-af-video
                   src="{{ block.settings.video_url }}"
                   poster="{% if block.settings.poster != blank %}{{ block.settings.poster | image_url: width: 800 }}{% else %}{{ block.settings.fallback_poster | asset_url }}{% endif %}"
                   muted loop playsinline preload="metadata"
                   class="h-full w-full object-cover"></video>
-                <button type="button" data-af-video-toggle aria-label="Play {{ block.settings.title | escape }}"
+                <button type="button" data-af-video-toggle data-af-video-src="{{ block.settings.video_url }}" aria-label="Play {{ block.settings.title | escape }}"
                   class="absolute inset-0 flex items-center justify-center bg-background/30 transition-opacity opacity-100">
                   <span class="flex h-14 w-14 items-center justify-center rounded-full bg-foreground text-background shadow-xl transition-transform hover:scale-110">
                     <span class="af-icon ml-0.5 h-6 w-6">{{ icon_play_filled }}</span>
