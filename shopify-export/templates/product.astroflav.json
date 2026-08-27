@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "astroflav-product": {
+      "type": "astroflav-product",
+      "blocks": {
+        "ugc-1": {
+          "type": "ugc",
+          "settings": {
+            "title": "Morning stack routine",
+            "handle": "@customer",
+            "fallback_poster": "supplements.jpg"
+          }
+        },
+        "ugc-2": {
+          "type": "ugc",
+          "settings": {
+            "title": "Pre-workout fuel up",
+            "handle": "@customer",
+            "fallback_poster": "pre-intra.png"
+          }
+        },
+        "ugc-3": {
+          "type": "ugc",
+          "settings": {
+            "title": "30 days in",
+            "handle": "@customer",
+            "fallback_poster": "stacks.jpg"
+          }
+        },
+        "ugc-4": {
+          "type": "ugc",
+          "settings": {
+            "title": "Unboxing the bundle",
+            "handle": "@customer",
+            "fallback_poster": "bundle.jpg"
+          }
+        }
+      },
+      "block_order": ["ugc-1", "ugc-2", "ugc-3", "ugc-4"],
+      "settings": {
+        "show_header": true,
+        "show_footer": true
+      }
+    }
+  },
+  "order": ["astroflav-product"]
+}

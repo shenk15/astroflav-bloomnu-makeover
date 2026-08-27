@@ -1,0 +1,665 @@
+{%- comment -%}
+  AstroFlav product page — one reusable section for every product.
+
+  Everything on this page is driven by Shopify product data (title, images,
+  variants, price, description) plus optional metafields, so the same file
+  renders every product. Nothing here changes the cart, checkout, apps, or
+  any other template.
+
+  Install:
+    1. Upload assets/astroflav-product.css, assets/astroflav-product.js and the
+       image assets listed in shopify-export/README.md to Assets.
+    2. Copy this file to sections/astroflav-product.liquid
+    3. Copy templates/product.astroflav.json to templates/
+    4. Assign the "astroflav" product template to your products.
+
+  Optional metafields (all have fallbacks):
+    custom.card_detail   single line text   — subtitle under the title
+    custom.benefits      multi-line text    — one benefit per line, "Label :: detail"
+    custom.ingredients   multi-line text    — one per line, "Name :: detail"
+    custom.how_to_use    multi-line text    — directions
+    custom.supplement_facts  multi-line text (or rich text)
+    custom.faq           multi-line text    — one per line, "Question :: answer"
+{%- endcomment -%}
+
+{{ 'astroflav-product.css' | asset_url | stylesheet_tag }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800;1,900&display=swap">
+
+<style>
+  .astroflav-root .ingredient-hero::before {
+    background-image: url({{ 'hero-botanical.jpg' | asset_url }});
+  }
+</style>
+
+{%- capture icon_arrow_right -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>{%- endcapture -%}
+{%- capture icon_chevron_left -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>{%- endcapture -%}
+{%- capture icon_chevron_right -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>{%- endcapture -%}
+{%- capture icon_chevron_down -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>{%- endcapture -%}
+{%- capture icon_plus -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>{%- endcapture -%}
+{%- capture icon_minus -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/></svg>{%- endcapture -%}
+{%- capture icon_star -%}<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>{%- endcapture -%}
+{%- capture icon_truck -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>{%- endcapture -%}
+{%- capture icon_layers -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>{%- endcapture -%}
+{%- capture icon_menu -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>{%- endcapture -%}
+{%- capture icon_search -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>{%- endcapture -%}
+{%- capture icon_bag -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>{%- endcapture -%}
+{%- capture icon_user -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>{%- endcapture -%}
+{%- capture icon_dollar -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>{%- endcapture -%}
+{%- capture icon_mail -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>{%- endcapture -%}
+{%- capture icon_package -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>{%- endcapture -%}
+{%- capture icon_shield -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>{%- endcapture -%}
+{%- capture icon_leaf -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>{%- endcapture -%}
+{%- capture icon_flask -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31"/><path d="M14 9.3V2"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></svg>{%- endcapture -%}
+{%- capture icon_play_filled -%}<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>{%- endcapture -%}
+{%- capture icon_instagram -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>{%- endcapture -%}
+{%- capture icon_facebook -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>{%- endcapture -%}
+{%- capture icon_twitter -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>{%- endcapture -%}
+{%- capture icon_youtube -%}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>{%- endcapture -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign has_plans = false
+  if product.selling_plan_groups.size > 0
+    assign has_plans = true
+    assign first_plan = product.selling_plan_groups.first.selling_plans.first
+  endif
+  assign subtitle = product.metafields.custom.card_detail | default: product.type | default: product.vendor
+-%}
+
+<div class="astroflav-root min-h-screen bg-background text-foreground" data-astroflav-product>
+
+  {%- if section.settings.show_header -%}
+  <div class="border-b border-border bg-card px-4 py-2.5 text-center"
+    data-af-announcement-bar
+    data-text-one="{{ section.settings.announcement_1 | escape }}"
+    data-text-two="{{ section.settings.announcement_2 | escape }}">
+    <p class="af-fade flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground sm:text-xs" data-af-announcement>
+      <span class="af-icon h-3.5 w-3.5 shrink-0 text-primary" data-af-announcement-icon>{{ icon_truck }}</span>
+      <span data-af-announcement-text>{{ section.settings.announcement_1 }}</span>
+    </p>
+    <template data-af-icon-0>{{ icon_truck }}</template>
+    <template data-af-icon-1>{{ icon_layers }}</template>
+  </div>
+
+  <header class="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur-md">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+      <div class="flex items-center gap-3">
+        <button type="button" aria-label="Open menu" data-af-menu-toggle
+          class="af-icon-btn rounded-full p-2 text-foreground transition-colors hover:bg-accent lg:hidden">
+          <span class="af-icon h-5 w-5">{{ icon_menu }}</span>
+        </button>
+        <a href="{{ routes.root_url }}" aria-label="AstroFlav home" class="inline-flex items-center">
+          <img src="{{ 'astroflav-logo.png' | asset_url }}" alt="AstroFlav" class="h-6 w-auto" width="160" height="24">
+        </a>
+      </div>
+      <nav class="hidden items-center gap-8 lg:flex" aria-label="Primary">
+        <a href="{{ section.settings.nav_best_sellers | default: '/collections/all' }}" class="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground">Best Sellers</a>
+        <a href="{{ section.settings.nav_subscribe | default: '/collections/all' }}" class="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground">Subscribe &amp; Save</a>
+        <a href="{{ section.settings.nav_bundle | default: '/collections/all' }}" class="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground">Bundle Builder</a>
+        <a href="{{ section.settings.nav_articles | default: '/blogs/news' }}" class="text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground">Articles</a>
+      </nav>
+      <div class="flex items-center gap-1">
+        <a href="{{ routes.search_url }}" aria-label="Search" class="af-icon-btn rounded-full p-2 text-foreground transition-colors hover:bg-accent"><span class="af-icon h-5 w-5">{{ icon_search }}</span></a>
+        <a href="{{ routes.account_url }}" aria-label="Account" class="af-icon-btn hidden rounded-full p-2 text-foreground transition-colors hover:bg-accent sm:block"><span class="af-icon h-5 w-5">{{ icon_user }}</span></a>
+        <a href="{{ routes.cart_url }}" aria-label="Cart" class="af-icon-btn relative rounded-full p-2 text-foreground transition-colors hover:bg-accent">
+          <span class="af-icon h-5 w-5">{{ icon_bag }}</span>
+          <span data-af-cart-count class="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+    <nav data-af-mobile-nav hidden aria-label="Mobile navigation" class="border-t border-border bg-background px-4 py-4 lg:hidden">
+      <a href="{{ section.settings.nav_best_sellers | default: '/collections/all' }}" class="block py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Best Sellers</a>
+      <a href="{{ section.settings.nav_subscribe | default: '/collections/all' }}" class="block py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Subscribe &amp; Save</a>
+      <a href="{{ section.settings.nav_bundle | default: '/collections/all' }}" class="block py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Bundle Builder</a>
+      <a href="{{ section.settings.nav_articles | default: '/blogs/news' }}" class="block py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">Articles</a>
+    </nav>
+  </header>
+  {%- endif -%}
+
+  <main>
+    {%- comment -%} ── 1. GALLERY + BUY BOX ─────────────────────────────────── {%- endcomment -%}
+    <section class="ingredient-hero isolate">
+      <div class="ingredient-hero-content mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:py-16">
+        <nav aria-label="Breadcrumb" class="mb-6 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground/70">
+          <a href="{{ routes.root_url }}" class="transition-colors hover:text-foreground">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/collections/all" class="transition-colors hover:text-foreground">Shop</a>
+          <span aria-hidden="true">/</span>
+          <span class="text-foreground">{{ product.title | truncate: 32 }}</span>
+        </nav>
+
+        <div class="af-pdp-layout grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+
+          {%- comment -%} Gallery {%- endcomment -%}
+          <div class="af-pdp-gallery">
+            <div class="card-sheen relative aspect-square overflow-hidden rounded-3xl border border-border">
+              <div class="hero-glow pointer-events-none absolute inset-0" aria-hidden="true"></div>
+              {%- if product.compare_at_price > product.price -%}
+                <span class="absolute left-4 top-4 z-10 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+              {%- endif -%}
+              {%- if product.featured_image -%}
+                <img data-af-main-image src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.title | escape }}" loading="eager"
+                  class="relative h-full w-full object-contain p-8 drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] sm:p-12">
+              {%- else -%}
+                <img data-af-main-image src="{{ 'elevated-bottle.png' | asset_url }}" alt="{{ product.title | escape }}" loading="eager"
+                  class="relative h-full w-full object-contain p-8 drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] sm:p-12">
+              {%- endif -%}
+            </div>
+
+            {%- if product.images.size > 1 -%}
+              <div class="mt-4 flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {%- for image in product.images limit: 8 -%}
+                  <button type="button" data-af-thumb data-af-image="{{ image | image_url: width: 1200 }}"
+                    aria-label="View image {{ forloop.index }}"
+                    class="card-sheen h-20 w-20 shrink-0 overflow-hidden rounded-2xl border {% if forloop.first %}border-primary{% else %}border-border{% endif %} transition-colors hover:border-primary/60">
+                    <img src="{{ image | image_url: width: 200 }}" alt="" loading="lazy" class="h-full w-full object-contain p-2">
+                  </button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} Buy box {%- endcomment -%}
+          <div class="af-pdp-buybox">
+            <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-primary">{{ subtitle | default: section.settings.eyebrow_fallback }}</p>
+
+            <h1 class="mt-3 font-display text-5xl uppercase leading-[0.9] tracking-tight text-foreground sm:text-6xl">
+              {{ product.title }}<span class="text-primary">.</span>
+            </h1>
+
+            <div class="mt-4 flex items-center gap-3">
+              <span class="flex items-center gap-1" aria-label="5 star rating">
+                {%- for i in (1..5) -%}<span class="af-icon h-3.5 w-3.5 fill-foreground text-foreground">{{ icon_star }}</span>{%- endfor -%}
+              </span>
+              <span class="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground" data-af-review-slot>{{ section.settings.review_note }}</span>
+            </div>
+
+            <div class="mt-5 flex items-end gap-3">
+              <span data-af-price class="font-display text-4xl leading-none text-foreground">{{ current_variant.price | money }}</span>
+              <span data-af-compare class="text-base font-semibold text-muted-foreground line-through" {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}>
+                {{ current_variant.compare_at_price | money }}
+              </span>
+            </div>
+
+            {%- if product.description != blank -%}
+              <div class="af-rte mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground/85">
+                {{ product.description | strip_html | truncatewords: 55 }}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} Variant selector {%- endcomment -%}
+            {%- unless product.has_only_default_variant -%}
+              <div class="mt-7">
+                <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{{ product.options_with_values.first.name | default: 'Option' }}</p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  {%- for variant in product.variants -%}
+                    <button type="button" data-af-variant
+                      data-variant-id="{{ variant.id }}"
+                      data-price="{{ variant.price | money }}"
+                      data-compare="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
+                      data-available="{{ variant.available }}"
+                      data-image="{% if variant.featured_image %}{{ variant.featured_image | image_url: width: 1200 }}{% endif %}"
+                      aria-pressed="{% if variant.id == current_variant.id %}true{% else %}false{% endif %}"
+                      class="af-variant-pill rounded-full border px-5 py-2.5 text-xs font-bold uppercase tracking-[0.14em] transition-colors {% if variant.id == current_variant.id %}border-primary bg-primary/10 text-foreground{% else %}border-border text-muted-foreground hover:border-primary/60{% endif %} {% unless variant.available %}opacity-40{% endunless %}">
+                      {{ variant.title }}
+                    </button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endunless -%}
+
+            {%- comment -%} One-time vs subscribe {%- endcomment -%}
+            {%- if has_plans -%}
+              <div class="mt-7 space-y-3">
+                <button type="button" data-af-purchase data-plan-id="" aria-pressed="true"
+                  class="af-purchase-option flex w-full items-center gap-3 rounded-2xl border border-primary bg-primary/10 px-4 py-4 text-left">
+                  <span class="af-radio flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-primary">
+                    <span class="af-radio-dot h-2.5 w-2.5 rounded-full bg-primary"></span>
+                  </span>
+                  <span class="min-w-0 flex-1">
+                    <span class="block text-xs font-bold uppercase tracking-[0.16em] text-foreground">One-time purchase</span>
+                    <span class="mt-1 block text-[11px] text-muted-foreground">Ships once. No commitment.</span>
+                  </span>
+                  <span class="shrink-0 text-sm font-extrabold text-foreground">{{ current_variant.price | money }}</span>
+                </button>
+
+                {%- for group in product.selling_plan_groups -%}
+                  {%- for plan in group.selling_plans limit: 2 -%}
+                    <button type="button" data-af-purchase data-plan-id="{{ plan.id }}" aria-pressed="false"
+                      class="af-purchase-option flex w-full items-center gap-3 rounded-2xl border border-border px-4 py-4 text-left transition-colors hover:border-primary/60">
+                      <span class="af-radio flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-border">
+                        <span class="af-radio-dot h-2.5 w-2.5 rounded-full bg-transparent"></span>
+                      </span>
+                      <span class="min-w-0 flex-1">
+                        <span class="block text-xs font-bold uppercase tracking-[0.16em] text-foreground">Subscribe &amp; Save</span>
+                        <span class="mt-1 block text-[11px] text-muted-foreground">{{ plan.name }} · cancel anytime</span>
+                      </span>
+                      <span class="shrink-0 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">Save 20%</span>
+                    </button>
+                  {%- endfor -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} Quantity + add to cart {%- endcomment -%}
+            <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div class="flex h-14 w-fit items-center gap-1 rounded-full border border-border bg-card px-2">
+                <button type="button" data-af-qty="-1" aria-label="Decrease quantity"
+                  class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-accent">
+                  <span class="af-icon h-4 w-4">{{ icon_minus }}</span>
+                </button>
+                <input data-af-qty-input type="number" inputmode="numeric" min="1" value="1" aria-label="Quantity"
+                  class="h-10 w-10 border-0 bg-transparent text-center text-sm font-bold text-foreground focus:outline-none">
+                <button type="button" data-af-qty="1" aria-label="Increase quantity"
+                  class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-accent">
+                  <span class="af-icon h-4 w-4">{{ icon_plus }}</span>
+                </button>
+              </div>
+
+              <button type="button" data-af-atc data-variant-id="{{ current_variant.id }}"
+                {% unless current_variant.available %}disabled{% endunless %}
+                class="inline-flex h-14 flex-1 items-center justify-center gap-2 rounded-full bg-foreground px-8 text-xs font-bold uppercase tracking-[0.18em] text-background transition-transform hover:scale-[1.02] disabled:opacity-50">
+                <span data-af-atc-label>{% if current_variant.available %}Add to cart{% else %}Sold out{% endif %}</span>
+                <span class="af-icon h-4 w-4">{{ icon_arrow_right }}</span>
+              </button>
+            </div>
+
+            <ul class="mt-6 flex flex-wrap items-center gap-2">
+              {%- assign proof_points = section.settings.proof_pills | split: '|' -%}
+              {%- for point in proof_points -%}
+                <li class="rounded-full border border-border px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground/80">{{ point | strip }}</li>
+              {%- endfor -%}
+            </ul>
+
+            <p class="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              <span class="af-icon h-4 w-4 shrink-0 text-primary">{{ icon_truck }}</span>
+              {{ section.settings.shipping_note }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} ── 2. BENEFIT ICON ROW ──────────────────────────────────── {%- endcomment -%}
+    <section class="border-y border-border bg-card/40">
+      <ul class="af-benefit-row mx-auto grid max-w-7xl grid-cols-2 gap-x-4 gap-y-6 px-4 py-8 sm:grid-cols-4 sm:px-6 sm:py-10">
+        {%- assign benefit_rows = product.metafields.custom.benefits | default: section.settings.benefits_fallback | newline_to_br | split: '<br />' -%}
+        {%- assign benefit_icons = icon_shield | append: '@@' | append: icon_leaf | append: '@@' | append: icon_flask | append: '@@' | append: icon_package | split: '@@' -%}
+        {%- for row in benefit_rows limit: 4 -%}
+          {%- assign parts = row | strip | split: '::' -%}
+          {%- if parts[0] != blank -%}
+            <li class="flex flex-col items-center text-center">
+              <span class="af-icon-btn flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary text-primary">
+                <span class="af-icon h-6 w-6">{{ benefit_icons[forloop.index0] }}</span>
+              </span>
+              <p class="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-foreground">{{ parts[0] | strip }}</p>
+              {%- if parts[1] -%}<p class="mt-1 max-w-[12rem] text-[11px] leading-snug text-muted-foreground">{{ parts[1] | strip }}</p>{%- endif -%}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </section>
+
+    {%- comment -%} ── 3. KEY INGREDIENTS ───────────────────────────────────── {%- endcomment -%}
+    {%- assign ingredient_source = product.metafields.custom.ingredients | default: section.settings.ingredients_fallback -%}
+    {%- if ingredient_source != blank -%}
+      <section id="ingredients" class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
+        <div class="af-ingredient-layout grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
+          <div>
+            <h2 class="font-display text-4xl uppercase leading-[0.92] tracking-tight text-foreground sm:text-5xl">
+              What's <span class="text-primary">inside</span>
+            </h2>
+            <p class="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground/85">{{ section.settings.ingredients_intro }}</p>
+          </div>
+          <ul class="space-y-3">
+            {%- assign ingredient_rows = ingredient_source | newline_to_br | split: '<br />' -%}
+            {%- for row in ingredient_rows -%}
+              {%- assign parts = row | strip | split: '::' -%}
+              {%- if parts[0] != blank -%}
+                {%- assign idx = forloop.index | prepend: '0' | slice: -2, 2 -%}
+                <li>
+                  <button type="button" aria-pressed="false" data-af-ingredient
+                    class="flex w-full items-start gap-3 rounded-2xl border border-border bg-card/40 px-4 py-4 text-left transition-colors hover:border-primary/50">
+                    <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-primary/40" data-af-ingredient-dot aria-hidden="true"></span>
+                    <span class="min-w-0">
+                      <span class="block text-xs font-bold uppercase tracking-[0.16em] text-foreground">{{ parts[0] | strip }}</span>
+                      <span class="mt-1 block text-[11px] text-muted-foreground/70">{{ parts[1] | strip }}</span>
+                    </span>
+                    <span class="ml-auto shrink-0 text-[10px] font-bold tracking-[0.2em] text-muted-foreground/50">{{ idx }}</span>
+                  </button>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ── 4. DETAILS ACCORDIONS ────────────────────────────────── {%- endcomment -%}
+    <section class="border-y border-border bg-card/40">
+      <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
+        <h2 class="font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">The <span class="text-primary">details</span></h2>
+        <div class="mt-8 divide-y divide-border border-y border-border">
+          {%- assign panel_titles = 'Description,How to use,Supplement facts' | split: ',' -%}
+          {%- capture panel_1 -%}{{ product.description | default: section.settings.description_fallback }}{%- endcapture -%}
+          {%- capture panel_2 -%}{{ product.metafields.custom.how_to_use | default: section.settings.how_to_use_fallback | newline_to_br }}{%- endcapture -%}
+          {%- capture panel_3 -%}{{ product.metafields.custom.supplement_facts | default: section.settings.supplement_facts_fallback | newline_to_br }}{%- endcapture -%}
+
+          {%- for title in panel_titles -%}
+            {%- case forloop.index -%}
+              {%- when 1 -%}{%- assign body = panel_1 -%}
+              {%- when 2 -%}{%- assign body = panel_2 -%}
+              {%- else -%}{%- assign body = panel_3 -%}
+            {%- endcase -%}
+            {%- if body != blank -%}
+              <div class="af-accordion">
+                <button type="button" data-af-accordion aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                  class="flex w-full items-center justify-between gap-4 py-5 text-left">
+                  <span class="text-sm font-bold uppercase tracking-[0.18em] text-foreground">{{ title }}</span>
+                  <span class="af-icon h-5 w-5 shrink-0 text-primary transition-transform" data-af-accordion-icon>{{ icon_chevron_down }}</span>
+                </button>
+                <div data-af-accordion-panel {% unless forloop.first %}hidden{% endunless %}
+                  class="af-rte pb-6 text-sm leading-relaxed text-muted-foreground">
+                  {{ body }}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- assign faq_source = product.metafields.custom.faq | default: section.settings.faq_fallback -%}
+          {%- assign faq_rows = faq_source | newline_to_br | split: '<br />' -%}
+          {%- for row in faq_rows -%}
+            {%- assign parts = row | strip | split: '::' -%}
+            {%- if parts[0] != blank and parts[1] != blank -%}
+              <div class="af-accordion">
+                <button type="button" data-af-accordion aria-expanded="false"
+                  class="flex w-full items-center justify-between gap-4 py-5 text-left">
+                  <span class="text-sm font-bold uppercase tracking-[0.18em] text-foreground">{{ parts[0] | strip }}</span>
+                  <span class="af-icon h-5 w-5 shrink-0 text-primary transition-transform" data-af-accordion-icon>{{ icon_chevron_down }}</span>
+                </button>
+                <div data-af-accordion-panel hidden class="af-rte pb-6 text-sm leading-relaxed text-muted-foreground">
+                  {{ parts[1] | strip }}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} ── 5. UGC VIDEOS ────────────────────────────────────────── {%- endcomment -%}
+    {%- assign ugc_count = 0 -%}
+    {%- for block in section.blocks -%}{%- if block.type == 'ugc' -%}{%- assign ugc_count = ugc_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+    {%- if ugc_count > 0 -%}
+      <section id="community" class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
+            Real people. <span class="text-primary">Real results.</span>
+          </h2>
+          <div class="flex shrink-0 gap-2">
+            <button type="button" data-af-scroll="pdp-ugc-track" data-af-dir="-1" aria-label="Previous videos"
+              class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
+              <span class="af-icon h-5 w-5">{{ icon_chevron_left }}</span>
+            </button>
+            <button type="button" data-af-scroll="pdp-ugc-track" data-af-dir="1" aria-label="Next videos"
+              class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
+              <span class="af-icon h-5 w-5">{{ icon_chevron_right }}</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="pdp-ugc-track" class="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-10 lg:gap-6">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'ugc' -%}
+              <div {{ block.shopify_attributes }} data-af-video-card class="group relative w-[240px] shrink-0 snap-start overflow-hidden rounded-3xl border border-border bg-card sm:w-[280px]">
+                <div class="relative aspect-[9/16]">
+                  <video data-af-video src="{{ block.settings.video_url }}"
+                    poster="{% if block.settings.poster != blank %}{{ block.settings.poster | image_url: width: 800 }}{% else %}{{ block.settings.fallback_poster | asset_url }}{% endif %}"
+                    muted loop playsinline preload="metadata" class="h-full w-full object-cover"></video>
+                  <button type="button" data-af-video-toggle data-af-video-src="{{ block.settings.video_url }}" aria-label="Play {{ block.settings.title | escape }}"
+                    class="absolute inset-0 flex items-center justify-center bg-background/30 transition-opacity">
+                    <span class="flex h-14 w-14 items-center justify-center rounded-full bg-foreground text-background shadow-xl transition-transform hover:scale-110">
+                      <span class="af-icon ml-0.5 h-6 w-6">{{ icon_play_filled }}</span>
+                    </span>
+                  </button>
+                </div>
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-4 pt-10" style="pointer-events:none">
+                  <p class="text-sm font-bold text-foreground">{{ block.settings.title }}</p>
+                  <p class="text-xs font-medium text-muted-foreground">{{ block.settings.handle }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- comment -%} ── 6. YOU MAY ALSO LIKE ─────────────────────────────────── {%- endcomment -%}
+    {%- liquid
+      assign rec_collection = collections[section.settings.related_collection]
+      if rec_collection == blank
+        assign rec_collection = product.collections.first
+      endif
+    -%}
+    {%- if rec_collection.products.size > 0 -%}
+      <section id="related" class="border-t border-border">
+        <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
+          <div class="flex items-end justify-between gap-4">
+            <div class="min-w-0">
+              <h2 class="font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
+                You may also <span class="text-primary">like</span>
+              </h2>
+              <p class="mt-3 flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <span class="af-icon h-4 w-4 shrink-0 text-primary">{{ icon_truck }}</span>
+                {{ section.settings.shipping_note }}
+              </p>
+            </div>
+            <div class="flex shrink-0 gap-2">
+              <button type="button" data-af-scroll="pdp-related-track" data-af-dir="-1" aria-label="Previous products"
+                class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
+                <span class="af-icon h-5 w-5">{{ icon_chevron_left }}</span>
+              </button>
+              <button type="button" data-af-scroll="pdp-related-track" data-af-dir="1" aria-label="Next products"
+                class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
+                <span class="af-icon h-5 w-5">{{ icon_chevron_right }}</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="pdp-related-track" class="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-10 lg:gap-6">
+            {%- for rec in rec_collection.products limit: 8 -%}
+              {%- unless rec.id == product.id -%}
+                <article class="group flex w-[240px] shrink-0 snap-start flex-col rounded-3xl border border-border bg-card p-4 transition-colors duration-300 hover:border-primary/60 sm:w-[280px] lg:w-[calc((100%-4.5rem)/4)]">
+                  <a href="{{ rec.url }}" class="card-sheen relative block aspect-square overflow-hidden rounded-2xl">
+                    <img src="{{ rec.featured_image | image_url: width: 600 }}" alt="{{ rec.title | escape }}" loading="lazy"
+                      class="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105">
+                  </a>
+                  <div class="flex flex-1 flex-col px-1 pb-1 pt-4">
+                    <div class="flex items-center gap-1" aria-label="5 star rating">
+                      {%- for i in (1..5) -%}<span class="af-icon h-3 w-3 fill-foreground text-foreground">{{ icon_star }}</span>{%- endfor -%}
+                    </div>
+                    <h3 class="mt-2 text-sm font-bold leading-snug text-foreground"><a href="{{ rec.url }}">{{ rec.title }}</a></h3>
+                    <p class="mt-1 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      {{ rec.metafields.custom.card_detail | default: rec.type | default: rec.vendor }}
+                    </p>
+                    <div class="mt-4 flex items-center justify-between gap-2">
+                      <span class="text-base font-extrabold text-foreground">{{ rec.price | money }}</span>
+                      <button type="button" data-af-add-to-cart="{{ rec.selected_or_first_available_variant.id }}"
+                        class="inline-flex items-center gap-1.5 rounded-full bg-foreground px-4 py-2 text-xs font-bold uppercase tracking-wider text-background transition-transform hover:scale-105">
+                        <span class="af-icon h-3.5 w-3.5">{{ icon_plus }}</span>
+                        Add
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+  </main>
+
+  {%- comment -%} Sticky mobile buy bar {%- endcomment -%}
+  <div data-af-sticky-bar hidden
+    class="fixed inset-x-0 bottom-0 z-40 flex items-center gap-3 border-t border-border bg-background/95 px-4 py-3 backdrop-blur-md lg:hidden">
+    <div class="min-w-0 flex-1">
+      <p class="truncate text-xs font-bold uppercase tracking-[0.14em] text-foreground">{{ product.title }}</p>
+      <p data-af-sticky-price class="text-sm font-extrabold text-foreground">{{ current_variant.price | money }}</p>
+    </div>
+    <button type="button" data-af-sticky-atc
+      class="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-foreground px-6 text-xs font-bold uppercase tracking-[0.16em] text-background">
+      Add to cart
+    </button>
+  </div>
+
+  {%- comment -%} UGC video lightbox {%- endcomment -%}
+  <div data-af-video-modal role="dialog" aria-modal="true" aria-label="Video player"
+    style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(0,0,0,.92);padding:16px;">
+    <button type="button" data-af-video-close aria-label="Close video"
+      style="position:absolute;top:20px;right:20px;z-index:2;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:9999px;background:#fff;color:#000;font-size:20px;font-weight:700;line-height:1;border:none;cursor:pointer;">✕</button>
+    <video data-af-modal-video controls playsinline preload="metadata"
+      style="max-height:88vh;max-width:min(420px,94vw);width:100%;border-radius:24px;background:#000;box-shadow:0 25px 80px rgba(0,0,0,.6);"></video>
+  </div>
+
+  {%- if section.settings.show_footer -%}
+  <footer class="border-t border-border bg-background">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <div class="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
+        <div>
+          <a href="{{ routes.root_url }}" aria-label="AstroFlav home" class="inline-flex items-center">
+            <img src="{{ 'astroflav-logo.png' | asset_url }}" alt="AstroFlav" class="h-9 w-auto">
+          </a>
+          <p class="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            Premium performance supplements. USA made, third-party tested, and never any fillers or added sugar.
+          </p>
+          {%- form 'customer', class: 'mt-6 flex max-w-sm items-center gap-2' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <label for="pdp-newsletter-email" class="sr-only">Email address</label>
+            <input id="pdp-newsletter-email" type="email" name="contact[email]" required placeholder="Email for exclusive drops"
+              class="h-12 w-full rounded-full border border-input bg-card px-5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring">
+            <button type="submit" aria-label="Subscribe"
+              class="af-icon-btn flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform hover:scale-105">
+              <span class="af-icon h-5 w-5">{{ icon_arrow_right }}</span>
+            </button>
+          {%- endform -%}
+          <div class="mt-6 flex gap-2">
+            <a href="{{ section.settings.instagram_url | default: '/' }}" aria-label="Instagram" class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"><span class="af-icon h-5 w-5">{{ icon_instagram }}</span></a>
+            <a href="{{ section.settings.facebook_url | default: '/' }}" aria-label="Facebook" class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"><span class="af-icon h-5 w-5">{{ icon_facebook }}</span></a>
+            <a href="{{ section.settings.twitter_url | default: '/' }}" aria-label="Twitter" class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"><span class="af-icon h-5 w-5">{{ icon_twitter }}</span></a>
+            <a href="{{ section.settings.youtube_url | default: '/' }}" aria-label="YouTube" class="af-icon-btn flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary hover:text-foreground"><span class="af-icon h-5 w-5">{{ icon_youtube }}</span></a>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Shop</h3>
+            <ul class="mt-5 space-y-3">
+              <li><a href="/collections/all" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Supplements</a></li>
+              <li><a href="/collections/stacks" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Stacks</a></li>
+              <li><a href="/collections/all" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Bundle Builder</a></li>
+              <li><a href="/products/gift-card" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Gift Cards</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Company</h3>
+            <ul class="mt-5 space-y-3">
+              <li><a href="/pages/about" class="text-sm text-muted-foreground transition-colors hover:text-foreground">About Us</a></li>
+              <li><a href="/blogs/news" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Articles</a></li>
+              <li><a href="/pages/guarantee" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Our Guarantee</a></li>
+              <li><a href="/pages/wholesale" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Wholesale</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold uppercase tracking-[0.25em] text-primary">Support</h3>
+            <ul class="mt-5 space-y-3">
+              <li><a href="/pages/faq" class="text-sm text-muted-foreground transition-colors hover:text-foreground">FAQ</a></li>
+              <li><a href="/policies/shipping-policy" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Shipping</a></li>
+              <li><a href="/policies/refund-policy" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Returns</a></li>
+              <li><a href="/pages/contact" class="text-sm text-muted-foreground transition-colors hover:text-foreground">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
+        <p class="text-xs text-muted-foreground">&copy; {{ 'now' | date: '%Y' }} AstroFlav. All rights reserved.</p>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">USA Made &bull; Third-Party Tested &bull; No Fillers</p>
+      </div>
+    </div>
+  </footer>
+  {%- endif -%}
+</div>
+
+<script src="{{ 'astroflav-product.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "AstroFlav Product",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "show_header", "label": "Show AstroFlav header (turn off to keep your theme header)", "default": true },
+    { "type": "checkbox", "id": "show_footer", "label": "Show AstroFlav footer (turn off to keep your theme footer)", "default": true },
+
+    { "type": "header", "content": "Header links" },
+    { "type": "url", "id": "nav_best_sellers", "label": "Best Sellers link" },
+    { "type": "url", "id": "nav_subscribe", "label": "Subscribe & Save link" },
+    { "type": "url", "id": "nav_bundle", "label": "Bundle Builder link" },
+    { "type": "url", "id": "nav_articles", "label": "Articles link" },
+
+    { "type": "header", "content": "Announcement bar" },
+    { "type": "text", "id": "announcement_1", "label": "Message 1", "default": "Free U.S. priority shipping on orders over $99" },
+    { "type": "text", "id": "announcement_2", "label": "Message 2", "default": "Buy any 3 products & save 10% — build your bundle" },
+
+    { "type": "header", "content": "Buy box" },
+    { "type": "text", "id": "eyebrow_fallback", "label": "Eyebrow fallback (used when the product has no subtitle)", "default": "Performance Supplement" },
+    { "type": "text", "id": "review_note", "label": "Rating note", "default": "Loved by the AstroFlav community" },
+    { "type": "text", "id": "proof_pills", "label": "Proof pills (separate with |)", "default": "USA Made|Third-Party Tested|No Fillers|30-Day Money-Back Guarantee" },
+    { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Free shipping on US orders over $99" },
+
+    { "type": "header", "content": "Fallback content (used when a product has no metafields)" },
+    { "type": "textarea", "id": "benefits_fallback", "label": "Benefits — one per line, 'Label :: detail'", "default": "Third-Party Tested :: Every batch verified\nClean Formula :: No fillers, no added sugar\nClinical Doses :: Backed by research\nUSA Made :: cGMP facility" },
+    { "type": "text", "id": "ingredients_intro", "label": "Ingredients intro", "default": "Clinically studied actives at doses that actually do something — nothing hidden behind a proprietary blend." },
+    { "type": "textarea", "id": "ingredients_fallback", "label": "Ingredients — one per line, 'Name :: detail'", "default": "Tongkat Ali :: Root extract · drive + stamina\nKSM-66 Ashwagandha :: Full-spectrum root · resilience\nFadogia Agrestis :: Standardized extract · vitality" },
+    { "type": "textarea", "id": "description_fallback", "label": "Description fallback", "default": "" },
+    { "type": "textarea", "id": "how_to_use_fallback", "label": "How to use fallback", "default": "Take as directed on the label. For best results, use consistently for at least 30 days." },
+    { "type": "textarea", "id": "supplement_facts_fallback", "label": "Supplement facts fallback", "default": "See the product label for the full supplement facts panel." },
+    { "type": "textarea", "id": "faq_fallback", "label": "FAQ — one per line, 'Question :: answer'", "default": "When will I see results? :: Most customers notice a difference within 2-4 weeks of consistent use.\nCan I stack this with other AstroFlav products? :: Yes — our formulas are designed to be stacked. Build a bundle and save.\nWhat is your guarantee? :: Every order is covered by our 30-day money-back guarantee." },
+
+    { "type": "header", "content": "You may also like" },
+    { "type": "collection", "id": "related_collection", "label": "Collection (defaults to this product's first collection)" },
+
+    { "type": "header", "content": "Footer social links" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook" },
+    { "type": "url", "id": "twitter_url", "label": "Twitter" },
+    { "type": "url", "id": "youtube_url", "label": "YouTube" }
+  ],
+  "blocks": [
+    {
+      "type": "ugc",
+      "name": "UGC video",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Morning stack routine" },
+        { "type": "text", "id": "handle", "label": "Handle", "default": "@customer" },
+        { "type": "text", "id": "video_url", "label": "Video URL (upload to Files, paste the URL)" },
+        { "type": "image_picker", "id": "poster", "label": "Poster image" },
+        { "type": "text", "id": "fallback_poster", "label": "Fallback poster asset filename", "default": "supplements.jpg" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AstroFlav Product",
+      "blocks": [
+        { "type": "ugc", "settings": { "title": "Morning stack routine", "fallback_poster": "supplements.jpg" } },
+        { "type": "ugc", "settings": { "title": "Pre-workout fuel up", "fallback_poster": "pre-intra.png" } },
+        { "type": "ugc", "settings": { "title": "30 days on Elevated", "fallback_poster": "stacks.jpg" } },
+        { "type": "ugc", "settings": { "title": "Unboxing the bundle", "fallback_poster": "bundle.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

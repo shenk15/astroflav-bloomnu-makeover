@@ -9,7 +9,8 @@
 @import "tailwindcss/utilities.css" source(none) important;
 @source "../sections";
 @source "../assets/astroflav-home.js";
-@source inline("opacity-0 opacity-100 group-hover:opacity-100 bg-primary bg-primary/40 border-primary/50");
+@source "../assets/astroflav-product.js";
+@source inline("opacity-0 opacity-100 group-hover:opacity-100 bg-primary bg-primary/40 border-primary/50 bg-primary/10 bg-transparent border-primary border-border text-foreground text-muted-foreground");
 
 @theme {
   --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
@@ -423,4 +424,41 @@
 .astroflav-root .font-display,
 .astroflav-root h1, .astroflav-root h2, .astroflav-root h3 {
   text-transform: uppercase !important;
+}
+
+
+/* ---------------------------------------------------------------
+   Product page (astroflav-product.liquid) structural hardening. */
+.astroflav-root .af-pdp-layout { display: grid !important; width: 100% !important; }
+.astroflav-root .af-pdp-gallery,
+.astroflav-root .af-pdp-buybox { min-width: 0 !important; width: 100% !important; }
+.astroflav-root .af-benefit-row { display: grid !important; width: 100% !important; }
+.astroflav-root .af-ingredient-layout { display: grid !important; width: 100% !important; }
+.astroflav-root .af-variant-pill { cursor: pointer !important; }
+.astroflav-root .af-purchase-option { cursor: pointer !important; }
+.astroflav-root [data-af-qty-input]::-webkit-outer-spin-button,
+.astroflav-root [data-af-qty-input]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.astroflav-root [data-af-qty-input] { -moz-appearance: textfield; }
+
+@media (min-width: 1024px) {
+  .astroflav-root .af-pdp-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    align-items: start !important;
+  }
+  .astroflav-root .af-ingredient-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) !important;
+  }
+}
+
+/* Rich text coming from the product description / metafields */
+.astroflav-root .af-rte p { margin: 0 0 0.85em 0 !important; }
+.astroflav-root .af-rte p:last-child { margin-bottom: 0 !important; }
+.astroflav-root .af-rte ul { list-style: disc !important; padding-left: 1.25rem !important; margin: 0 0 0.85em !important; }
+.astroflav-root .af-rte ol { list-style: decimal !important; padding-left: 1.25rem !important; margin: 0 0 0.85em !important; }
+.astroflav-root .af-rte li { list-style: inherit !important; margin: 0 0 0.35em !important; }
+.astroflav-root .af-rte strong { font-weight: 800 !important; }
+.astroflav-root .af-rte a { text-decoration: underline !important; }
+.astroflav-root .af-rte h1, .astroflav-root .af-rte h2,
+.astroflav-root .af-rte h3, .astroflav-root .af-rte h4 {
+  font-weight: 800 !important; text-transform: none !important; margin: 0 0 0.5em !important;
 }
