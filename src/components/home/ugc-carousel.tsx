@@ -1,23 +1,15 @@
-import { useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, Play } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, Play, X } from "lucide-react";
 import { ugcVideos, type UgcVideo } from "@/lib/ugc-videos";
 
-function VideoCard({ video }: { video: UgcVideo }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [playing, setPlaying] = useState(false);
+function VideoCard({
+  video,
+  onOpen,
+}: {
+  video: UgcVideo;
+  onOpen: (video: UgcVideo) => void;
+}) {
   const [missing, setMissing] = useState(false);
-
-  const toggle = () => {
-    const el = videoRef.current;
-    if (!el || missing) return;
-    if (el.paused) {
-      void el.play();
-      setPlaying(true);
-    } else {
-      el.pause();
-      setPlaying(false);
-    }
-  };
 
   return (
     <div className="group relative w-[240px] shrink-0 snap-start overflow-hidden rounded-3xl border border-border bg-card sm:w-[280px]">
@@ -35,7 +27,6 @@ function VideoCard({ video }: { video: UgcVideo }) {
         ) : (
           <>
             <video
-              ref={videoRef}
               src={video.src}
               poster={video.poster}
               muted
@@ -43,16 +34,13 @@ function VideoCard({ video }: { video: UgcVideo }) {
               playsInline
               preload="metadata"
               onError={() => setMissing(true)}
-              onEnded={() => setPlaying(false)}
               className="h-full w-full object-cover"
             />
             <button
               type="button"
-              onClick={toggle}
-              aria-label={playing ? `Pause ${video.title}` : `Play ${video.title}`}
-              className={`absolute inset-0 flex items-center justify-center bg-background/30 transition-opacity ${
-                playing ? "opacity-0 group-hover:opacity-100" : "opacity-100"
-              }`}
+              onClick={() => onOpen(video)}
+              aria-label={`Play ${video.title}`}
+              className="absolute inset-0 flex items-center justify-center bg-background/30 transition-opacity opacity-100"
             >
               <span className="flex h-14 w-14 items-center justify-center rounded-full bg-foreground text-background shadow-xl transition-transform hover:scale-110">
                 <Play className="ml-0.5 h-6 w-6 fill-current" aria-hidden />
@@ -62,7 +50,7 @@ function VideoCard({ video }: { video: UgcVideo }) {
         )}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-4 pt-10">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-4 pt-10">
         <p className="text-sm font-bold text-foreground">{video.title}</p>
         <p className="text-xs font-medium text-muted-foreground">{video.handle}</p>
       </div>
@@ -72,12 +60,32 @@ function VideoCard({ video }: { video: UgcVideo }) {
 
 export function UgcCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const modalVideoRef = useRef<HTMLVideoElement>(null);
+  const [active, setActive] = useState<UgcVideo | null>(null);
 
   const scrollBy = (direction: 1 | -1) => {
     const track = trackRef.current;
     if (!track) return;
     track.scrollBy({ left: direction * 300, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    if (!active) return;
+    document.body.style.overflow = "hidden";
+    const el = modalVideoRef.current;
+    if (el) {
+      el.muted = false;
+      void el.play().catch(() => {});
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [active]);
 
   return (
     <section id="community" className="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-10 lg:py-14">
@@ -115,9 +123,40 @@ export function UgcCarousel() {
         className="mt-6 flex snap-x sm:mt-10 snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-6"
       >
         {ugcVideos.map((video) => (
-          <VideoCard key={video.src} video={video} />
+          <VideoCard key={video.src} video={video} onOpen={setActive} />
         ))}
       </div>
+
+      {active && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${active.title} video player`}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActive(null);
+          }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 p-4"
+        >
+          <button
+            type="button"
+            onClick={() => setActive(null)}
+            aria-label="Close video"
+            className="absolute right-5 top-5 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-foreground text-background transition-transform hover:scale-110"
+          >
+            <X className="h-5 w-5" aria-hidden />
+          </button>
+          <video
+            ref={modalVideoRef}
+            key={active.src}
+            src={active.src}
+            poster={active.poster}
+            controls
+            playsInline
+            preload="auto"
+            className="max-h-[88vh] w-full max-w-[420px] rounded-3xl bg-background object-cover shadow-2xl"
+          />
+        </div>
+      )}
     </section>
   );
 }
