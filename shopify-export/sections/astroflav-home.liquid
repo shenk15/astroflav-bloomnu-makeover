@@ -438,7 +438,7 @@
                   </span>
                 </button>
               </div>
-              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-4 pt-10">
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-4 pt-10" style="pointer-events:none">
                 <p class="text-sm font-bold text-foreground">{{ block.settings.title }}</p>
                 <p class="text-xs font-medium text-muted-foreground">{{ block.settings.handle }}</p>
               </div>
@@ -446,8 +446,17 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
-    </section>
-  </main>
+     </section>
+   </main>
+
+  {%- comment -%} ── UGC VIDEO LIGHTBOX ─────────────────────────────────────── {%- endcomment -%}
+  <div data-af-video-modal role="dialog" aria-modal="true" aria-label="Video player"
+    style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;background:rgba(0,0,0,.92);padding:16px;">
+    <button type="button" data-af-video-close aria-label="Close video"
+      style="position:absolute;top:20px;right:20px;z-index:2;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:9999px;background:#fff;color:#000;font-size:20px;font-weight:700;line-height:1;border:none;cursor:pointer;">✕</button>
+    <video data-af-modal-video controls playsinline preload="metadata"
+      style="max-height:88vh;max-width:min(420px,94vw);width:100%;border-radius:24px;background:#000;box-shadow:0 25px 80px rgba(0,0,0,.6);"></video>
+  </div>
 
   {%- if section.settings.show_footer -%}
   {%- comment -%} ── FOOTER ────────────────────────────────────────────────── {%- endcomment -%}
