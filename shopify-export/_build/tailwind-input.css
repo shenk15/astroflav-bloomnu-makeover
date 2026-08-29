@@ -462,3 +462,7 @@
 .astroflav-root .af-rte h3, .astroflav-root .af-rte h4 {
   font-weight: 800 !important; text-transform: none !important; margin: 0 0 0.5em !important;
 }
+
+/* App blocks (Skio, reviews, etc.) inherit AstroFlav colors inside the buy box */
+.astroflav-root .af-app-block { color: hsl(var(--foreground)) !important; }
+.astroflav-root .af-app-block :where(h1,h2,h3,h4,p,span,label,legend) { font-style: normal !important; }
