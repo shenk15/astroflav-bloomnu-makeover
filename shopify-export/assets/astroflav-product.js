@@ -175,7 +175,10 @@
       var id = atc && atc.getAttribute("data-variant-id");
       var qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
       var item = { id: Number(id), quantity: qty };
-      if (selectedPlan) item.selling_plan = Number(selectedPlan);
+      /* Skio plan picker (and other subscription apps) set a hidden selling_plan input */
+      var planInput = root.querySelector('input[name="selling_plan"]');
+      var plan = planInput && planInput.value ? planInput.value : selectedPlan;
+      if (plan) item.selling_plan = Number(plan);
       return { items: [item] };
     }
 

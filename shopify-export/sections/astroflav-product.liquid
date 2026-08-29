@@ -244,13 +244,13 @@
               </div>
             {%- endif -%}
 
-            {%- comment -%} App blocks (Skio, reviews, upsells, etc.) — added via the Theme Editor {%- endcomment -%}
+            {%- comment -%} App + theme blocks (Skio plan picker, reviews, upsells, etc.) — added via the Theme Editor {%- endcomment -%}
             {%- for block in section.blocks -%}
-              {%- if block.type == '@app' -%}
+              {%- unless block.type == 'ugc' -%}
                 <div class="af-app-block mt-7" {{ block.shopify_attributes }}>
                   {% render block %}
                 </div>
-              {%- endif -%}
+              {%- endunless -%}
             {%- endfor -%}
 
             {%- comment -%} Quantity + add to cart {%- endcomment -%}
@@ -659,7 +659,8 @@
         { "type": "text", "id": "fallback_poster", "label": "Fallback poster asset filename", "default": "supplements.jpg" }
       ]
     },
-    { "type": "@app" }
+    { "type": "@app" },
+    { "type": "@theme" }
   ],
   "presets": [
     {
