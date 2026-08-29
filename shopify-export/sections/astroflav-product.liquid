@@ -614,29 +614,12 @@
     { "type": "url", "id": "youtube_url", "label": "YouTube" }
   ],
   "blocks": [
-    {
-      "type": "ugc",
-      "name": "UGC video",
-      "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Morning stack routine" },
-        { "type": "text", "id": "handle", "label": "Handle", "default": "@customer" },
-        { "type": "text", "id": "video_url", "label": "Video URL (upload to Files, paste the URL)" },
-        { "type": "image_picker", "id": "poster", "label": "Poster image" },
-        { "type": "text", "id": "fallback_poster", "label": "Fallback poster asset filename", "default": "supplements.jpg" }
-      ]
-    },
     { "type": "@app" },
     { "type": "@theme" }
   ],
   "presets": [
     {
-      "name": "AstroFlav Product",
-      "blocks": [
-        { "type": "ugc", "settings": { "title": "Morning stack routine", "fallback_poster": "supplements.jpg" } },
-        { "type": "ugc", "settings": { "title": "Pre-workout fuel up", "fallback_poster": "pre-intra.png" } },
-        { "type": "ugc", "settings": { "title": "30 days on Elevated", "fallback_poster": "stacks.jpg" } },
-        { "type": "ugc", "settings": { "title": "Unboxing the bundle", "fallback_poster": "bundle.jpg" } }
-      ]
+      "name": "AstroFlav Product"
     }
   ]
 }
