@@ -401,45 +401,11 @@
 
     {%- comment -%} ── 5. UGC VIDEOS ────────────────────────────────────────── {%- endcomment -%}
     {%- assign ugc_count = 0 -%}
-    {%- for block in section.blocks -%}{%- if block.type == 'ugc' -%}{%- assign ugc_count = ugc_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
-    {%- if ugc_count > 0 -%}
-      <section id="community" class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
-        <div class="flex items-end justify-between gap-4">
-          <h2 class="font-display text-4xl uppercase leading-none tracking-tight text-foreground sm:text-5xl">
-            Real people. <span class="text-primary">Real results.</span>
-          </h2>
-          <div class="flex shrink-0 gap-2">
-            <button type="button" data-af-scroll="pdp-ugc-track" data-af-dir="-1" aria-label="Previous videos"
-              class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
-              <span class="af-icon h-5 w-5">{{ icon_chevron_left }}</span>
-            </button>
-            <button type="button" data-af-scroll="pdp-ugc-track" data-af-dir="1" aria-label="Next videos"
-              class="af-icon-btn flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:border-primary/60">
-              <span class="af-icon h-5 w-5">{{ icon_chevron_right }}</span>
-            </button>
-          </div>
-        </div>
-
-        <div id="pdp-ugc-track" class="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-10 lg:gap-6">
+    {%- for block in section.blocks -%}{%- if block.type == 'af-ugc-video' -%}{%- assign ugc_count = ugc_count | plus: 1 -%}{%- endif -%}{%- endfor -%}
+...
           {%- for block in section.blocks -%}
-            {%- if block.type == 'ugc' -%}
-              <div {{ block.shopify_attributes }} data-af-video-card class="group relative w-[240px] shrink-0 snap-start overflow-hidden rounded-3xl border border-border bg-card sm:w-[280px]">
-                <div class="relative aspect-[9/16]">
-                  <video data-af-video src="{{ block.settings.video_url }}"
-                    poster="{% if block.settings.poster != blank %}{{ block.settings.poster | image_url: width: 800 }}{% else %}{{ block.settings.fallback_poster | asset_url }}{% endif %}"
-                    muted loop playsinline preload="metadata" class="h-full w-full object-cover"></video>
-                  <button type="button" data-af-video-toggle data-af-video-src="{{ block.settings.video_url }}" aria-label="Play {{ block.settings.title | escape }}"
-                    class="absolute inset-0 flex items-center justify-center bg-background/30 transition-opacity">
-                    <span class="flex h-14 w-14 items-center justify-center rounded-full bg-foreground text-background shadow-xl transition-transform hover:scale-110">
-                      <span class="af-icon ml-0.5 h-6 w-6">{{ icon_play_filled }}</span>
-                    </span>
-                  </button>
-                </div>
-                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/90 to-transparent p-4 pt-10" style="pointer-events:none">
-                  <p class="text-sm font-bold text-foreground">{{ block.settings.title }}</p>
-                  <p class="text-xs font-medium text-muted-foreground">{{ block.settings.handle }}</p>
-                </div>
-              </div>
+            {%- if block.type == 'af-ugc-video' -%}
+              {% render block %}
             {%- endif -%}
           {%- endfor -%}
         </div>
