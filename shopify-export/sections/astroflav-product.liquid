@@ -244,6 +244,15 @@
               </div>
             {%- endif -%}
 
+            {%- comment -%} App blocks (Skio, reviews, upsells, etc.) — added via the Theme Editor {%- endcomment -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == '@app' -%}
+                <div class="af-app-block mt-7" {{ block.shopify_attributes }}>
+                  {% render block %}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+
             {%- comment -%} Quantity + add to cart {%- endcomment -%}
             <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center">
               <div class="flex h-14 w-fit items-center gap-1 rounded-full border border-border bg-card px-2">
@@ -648,7 +657,8 @@
         { "type": "image_picker", "id": "poster", "label": "Poster image" },
         { "type": "text", "id": "fallback_poster", "label": "Fallback poster asset filename", "default": "supplements.jpg" }
       ]
-    }
+    },
+    { "type": "@app" }
   ],
   "presets": [
     {
