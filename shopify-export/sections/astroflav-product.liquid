@@ -246,7 +246,7 @@
 
             {%- comment -%} App + theme blocks (Skio plan picker, reviews, upsells, etc.) — added via the Theme Editor {%- endcomment -%}
             {%- for block in section.blocks -%}
-              {%- unless block.type == 'ugc' -%}
+              {%- unless block.type == 'af-ugc-video' -%}
                 <div class="af-app-block mt-7" {{ block.shopify_attributes }}>
                   {% render block %}
                 </div>
